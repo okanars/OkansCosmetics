@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İletişim - Okan'ın Kozmetiği</title>
+    <meta name="description" content="Okan'ın Kozmetiği ile iletişime geçin. Adres, telefon ve e-posta bilgilerimiz.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/css/chatbot.css">
+    <script src="/js/lang.js"></script>
+</head>
+<body>
+
+    <header>
+        <nav class="container">
+            <a href="/index.html" class="logo">
+                <i class="fas fa-flask"></i>
+                <span data-i18n="general.companyName">Okan'ın Kozmetiği</span>
+            </a>
+            <div class="nav-right">
+                <div class="nav-links">
+                    <a href="/index.html" class="nav-link" data-i18n="menu.home">
+                        <i class="fas fa-home"></i>
+                        Ana Sayfa
+                    </a>
+                    <a href="/urunler/index.html" class="nav-link" data-i18n="menu.products">
+                        <i class="fas fa-cube"></i>
+                        Ürünler
+                    </a>
+                    <a href="/hakkimizda.html" class="nav-link" data-i18n="menu.about">
+                        <i class="fas fa-users"></i>
+                        Hakkımızda
+                    </a>
+                    <a href="/iletisim.html" class="nav-link" data-i18n="menu.contact">
+                        <i class="fas fa-envelope"></i>
+                        İletişim
+                    </a>
+                </div>
+                <div class="lang-selector-wrapper" id="lang-selector-wrapper">
+                    <!-- Dil seçici JS tarafından buraya eklenecek -->
+                </div>
+                <button class="menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-hero">
+            <div class="container">
+                <div class="page-hero-content reveal">
+                    <div class="page-badge">
+                        <i class="fas fa-phone"></i>
+                        <span data-i18n="contact.badge">Bizimle İletişime Geçin</span>
+                    </div>
+                    <h1 data-i18n="contact.title">İletişim</h1>
+                    <p data-i18n="contact.subtitle">Kaliteli kimyasal ham maddeler için hemen iletişime geçin</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact-main container">
+            <div class="contact-grid">
+                <div class="contact-info-section reveal">
+                    <div class="contact-badge">
+                        <i class="fas fa-info-circle"></i>
+                        <span data-i18n="contact.infoTitle">İletişim Bilgileri</span>
+                    </div>
+                    <h2 data-i18n="contact.getInTouch">Bizimle İletişime Geçin</h2>
+                    <p data-i18n="contact.infoText">Kozmetik ham maddeleri konusunda uzman ekibimiz size yardımcı olmaya hazır. Aşağıdaki kanallardan bize ulaşabilirsiniz.</p>
+                    
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <div class="method-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="method-content">
+                                <h3 data-i18n="contact.phoneTitle">Telefon</h3>
+                                <p>+90 212 552 00 39</p>
+                                <span class="method-note" data-i18n="contact.phoneHours">Pazartesi - Cuma: 09:00 - 18:00</span>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-method">
+                            <div class="method-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="method-content">
+                                <h3 data-i18n="contact.emailTitle">E-posta</h3>
+                                <p>info@okaninkozmetigi.com</p>
+                                <span class="method-note" data-i18n="contact.emailResponse">24 saat içinde yanıt veriyoruz</span>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-method">
+                            <div class="method-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="method-content">
+                                <h3 data-i18n="contact.addressTitle">Adres</h3>
+                                <p>Halide Edip Adıvar Caddesi No:21<br>Selahaddin Eyyübi Mahallesi<br>Esenyurt / İstanbul, 34517</p>
+                                <span class="method-note" data-i18n="contact.addressNote">Merkez ofisimiz</span>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-method">
+                            <div class="method-icon">
+                                <i class="fab fa-whatsapp"></i>
+                            </div>
+                            <div class="method-content">
+                                <h3 data-i18n="contact.whatsappTitle">WhatsApp</h3>
+                                <p>+90 532 123 45 67</p>
+                                <span class="method-note" data-i18n="contact.whatsappNote">Hızlı destek için</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="social-contact">
+                        <h3 data-i18n="contact.socialMedia">Sosyal Medya</h3>
+                        <div class="social-buttons">
+                            <a href="#" class="social-btn linkedin">
+                                <i class="fab fa-linkedin"></i>
+                                <span>LinkedIn</span>
+                            </a>
+                            <a href="#" class="social-btn twitter">
+                                <i class="fab fa-twitter"></i>
+                                <span>Twitter</span>
+                            </a>
+                            <a href="#" class="social-btn instagram">
+                                <i class="fab fa-instagram"></i>
+                                <span>Instagram</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form-section reveal">
+                    <div class="form-container">
+                        <div class="form-header">
+                            <div class="form-badge">
+                                <i class="fas fa-paper-plane"></i>
+                                <span data-i18n="contact.formBadge">Mesaj Gönderin</span>
+                            </div>
+                            <h2 data-i18n="contact.formTitle">Hızlı İletişim Formu</h2>
+                            <p data-i18n="contact.formSubtitle">Formu doldurun, size en kısa sürede dönelim.</p>
+                        </div>
+                        
+                        <form class="contact-form" id="contactForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="firstName">
+                                        <i class="fas fa-user"></i>
+                                        <span data-i18n="contact.formFirstName">Ad</span>
+                                    </label>
+                                    <input type="text" id="firstName" name="firstName" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastName">
+                                        <i class="fas fa-user"></i>
+                                        <span data-i18n="contact.formLastName">Soyad</span>
+                                    </label>
+                                    <input type="text" id="lastName" name="lastName" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="email">
+                                        <i class="fas fa-envelope"></i>
+                                        <span data-i18n="contact.formEmail">E-posta</span>
+                                    </label>
+                                    <input type="email" id="email" name="email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">
+                                        <i class="fas fa-phone"></i>
+                                        <span data-i18n="contact.formPhone">Telefon</span>
+                                    </label>
+                                    <input type="tel" id="phone" name="phone" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="company">
+                                    <i class="fas fa-building"></i>
+                                    <span data-i18n="contact.formCompany">Şirket (Opsiyonel)</span>
+                                </label>
+                                <input type="text" id="company" name="company">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="subject">
+                                    <i class="fas fa-tag"></i>
+                                    <span data-i18n="contact.formSubject">Konu</span>
+                                </label>
+                                <select id="subject" name="subject" required>
+                                    <option value="" data-i18n="contact.formSubjectSelect">Konu seçiniz</option>
+                                    <option value="urun-bilgisi" data-i18n="contact.formSubjectInfo">Ürün Bilgisi</option>
+                                    <option value="fiyat-teklifi" data-i18n="contact.formSubjectQuote">Fiyat Teklifi</option>
+                                    <option value="teknik-destek" data-i18n="contact.formSubjectSupport">Teknik Destek</option>
+                                    <option value="is-birligi" data-i18n="contact.formSubjectPartnership">İş Birliği</option>
+                                    <option value="diger" data-i18n="contact.formSubjectOther">Diğer</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="message">
+                                    <i class="fas fa-comment"></i>
+                                    <span data-i18n="contact.formMessage">Mesajınız</span>
+                                </label>
+                                <textarea id="message" name="message" rows="5" required></textarea>
+                            </div>
+
+                            <div class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="privacy" required>
+                                    <span class="checkmark"></span>
+                                    <span class="checkbox-text">
+                                        <a href="#" data-i18n="contact.formPrivacyLink">Gizlilik Politikasını</a> 
+                                        <span data-i18n="contact.formPrivacy">okudum ve kabul ediyorum.</span>
+                                    </span>
+                                </label>
+                            </div>
+                            
+                            <button type="submit" class="btn-submit">
+                                <i class="fas fa-paper-plane"></i>
+                                <span data-i18n="contact.formSubmit">Mesajı Gönder</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="map-section">
+            <div class="container">
+                <div class="section-header reveal">
+                    <div class="section-badge">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <span data-i18n="contact.mapBadge">Konumumuz</span>
+                    </div>
+                    <h2 data-i18n="contact.mapTitle">Ofisimiz</h2>
+                    <p data-i18n="contact.mapSubtitle">Bizi ziyaret edin</p>
+                </div>
+                <div class="map-container reveal">
+                    <div class="map-placeholder">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h3 data-i18n="contact.mapPlaceholderTitle">Harita Yükleniyor...</h3>
+                        <p data-i18n="contact.mapPlaceholderText">Google Haritalar ile konumumuzu görebilirsiniz.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="faq-section">
+            <div class="container">
+                <div class="section-header reveal">
+                    <div class="section-badge">
+                        <i class="fas fa-question-circle"></i>
+                        <span data-i18n="contact.faqBadge">S.S.S.</span>
+                    </div>
+                    <h2 data-i18n="contact.faqTitle">Sıkça Sorulan Sorular</h2>
+                    <p data-i18n="contact.faqSubtitle">Aklınızdaki soruların cevaplarını burada bulabilirsiniz</p>
+                </div>
+                <div class="faq-grid">
+                    <div class="faq-item reveal">
+                        <div class="faq-question">
+                            <h3 data-i18n="contact.faq1_q">Hangi bölgelere teslimat yapıyorsunuz?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p data-i18n="contact.faq1_a">Türkiye'nin her yerine ve dünya genelinde 70'ten fazla ülkeye ihracat yapıyoruz. Lojistik ağımız sayesinde hızlı ve güvenilir teslimat sağlıyoruz.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item reveal">
+                        <div class="faq-question">
+                            <h3 data-i18n="contact.faq2_q">Minimum sipariş miktarı nedir?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p data-i18n="contact.faq2_a">Minimum sipariş miktarı (MOQ) ürüne göre değişiklik göstermektedir. Detaylı bilgi için lütfen bizimle iletişime geçin.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item reveal">
+                        <div class="faq-question">
+                            <h3 data-i18n="contact.faq3_q">Özel formülasyon talebinde bulunabilir miyim?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p data-i18n="contact.faq3_a">Evet, Ar-Ge ekibimiz projenize özel formülasyonlar geliştirebilir. İhtiyaçlarınızı ve beklentilerinizi bizimle paylaşmanız yeterlidir.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item reveal">
+                        <div class="faq-question">
+                            <h3 data-i18n="contact.faq4_q">Ürünlerinizin sertifikaları var mı?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p data-i18n="contact.faq4_a">Tüm ürünlerimiz uluslararası kalite standartlarına (ISO, GMP vb.) uygun olarak üretilir ve gerekli sertifikalara sahiptir.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-flask"></i>
+                        <span data-i18n="general.companyName">Okan'ın Kozmetiği</span>
+                    </div>
+                    <p data-i18n="general.companyDesc">Bilim ve güzelliği buluşturan yenilikçi çözümler.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4 data-i18n="general.quickLinks">Hızlı Linkler</h4>
+                    <ul>
+                        <li><a href="/urunler/" data-i18n="menu.products">Ürünler</a></li>
+                        <li><a href="/hakkimizda.html" data-i18n="menu.about">Hakkımızda</a></li>
+                        <li><a href="/iletisim.html" data-i18n="menu.contact">İletişim</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 data-i18n="general.contact">İletişim</h4>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span data-i18n="phone">+90 212 552 00 39</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span data-i18n="email">info@okaninkozmetigi.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span data-i18n="address">İstanbul, Türkiye</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 <span data-i18n="general.companyName">Okan'ın Kozmetiği</span> <span data-i18n="general.rights">Tüm hakları saklıdır.</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/products.js"></script>
+    <script src="/js/script.js"></script>
+    <script src="/js/chatbot.js"></script>
+</body>
+</html> 

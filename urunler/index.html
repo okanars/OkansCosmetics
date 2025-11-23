@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ürünlerimiz - Okan'ın Kozmetiği</title>
+    <meta name="description" content="Kişisel bakım ve kozmetik üretimi için tüm kimyasal ham madde portföyümüz.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/css/chatbot.css">
+    <script src="/js/lang.js"></script>
+</head>
+<body>
+
+    <header>
+        <nav class="container">
+            <a href="/index.html" class="logo">
+                <i class="fas fa-flask"></i>
+                <span data-i18n="general.companyName">Okan'ın Kozmetiği</span>
+            </a>
+            <div class="nav-right">
+                <div class="nav-links">
+                    <a href="/index.html" class="nav-link" data-i18n="menu.home">
+                        <i class="fas fa-home"></i>
+                        Ana Sayfa
+                    </a>
+                    <a href="/urunler/index.html" class="nav-link" data-i18n="menu.products">
+                        <i class="fas fa-cube"></i>
+                        Ürünler
+                    </a>
+                    <a href="/hakkimizda.html" class="nav-link" data-i18n="menu.about">
+                        <i class="fas fa-users"></i>
+                        Hakkımızda
+                    </a>
+                    <a href="/iletisim.html" class="nav-link" data-i18n="menu.contact">
+                        <i class="fas fa-envelope"></i>
+                        İletişim
+                    </a>
+                </div>
+                <div class="lang-selector-wrapper" id="lang-selector-wrapper">
+                    <!-- Dil seçici JS tarafından buraya eklenecek -->
+                </div>
+                <button class="menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-hero">
+            <div class="container">
+                <div class="page-hero-content reveal">
+                    <div class="page-badge">
+                        <i class="fas fa-cube"></i>
+                        <span data-i18n="general.productCatalog">Ürün Kataloğu</span>
+                    </div>
+                    <h1 data-i18n="general.ourProductCatalog">Ürün Kataloğumuz</h1>
+                    <p data-i18n="general.productCatalogDesc">Projeleriniz için aradığınız tüm kimyasal çözümler bir arada</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="products-main container">
+            <div class="products-header reveal">
+                <div class="products-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">20+</div>
+                        <div class="stat-label" data-i18n="general.productVariety">Ürün Çeşidi</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">15+</div>
+                        <div class="stat-label" data-i18n="general.yearsExperience">Yıllık Deneyim</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">70+</div>
+                        <div class="stat-label" data-i18n="general.exportCountries">İhracat Ülkesi</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="products-filters reveal">
+                <div class="filter-group">
+                    <label for="category-filter">
+                        <i class="fas fa-filter"></i>
+                        <span data-i18n="filter.category">Kategori</span>
+                    </label>
+                    <select id="category-filter">
+                        <option value="" data-i18n="general.allCategories">Tüm Kategoriler</option>
+                        <option value="surfaktan" data-i18n="general.surfactants">Sürfaktanlar</option>
+                        <option value="nemlendirici" data-i18n="general.moisturizers">Nemlendiriciler</option>
+                        <option value="koruyucu" data-i18n="general.preservatives">Koruyucular</option>
+                        <option value="aktif" data-i18n="general.actives">Aktif İçerikler</option>
+                        <option value="kivam" data-i18n="general.thickeners">Kıvamlaştırıcılar</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="origin-filter">
+                        <i class="fas fa-globe"></i>
+                        <span data-i18n="filter.origin">Menşei</span>
+                    </label>
+                    <select id="origin-filter">
+                        <option value="" data-i18n="general.allOrigins">Tüm Menşeiler</option>
+                        <option value="Almanya" data-i18n="general.germany">Almanya</option>
+                        <option value="Çin" data-i18n="general.china">Çin</option>
+                        <option value="Türkiye" data-i18n="general.turkey">Türkiye</option>
+                        <option value="İsviçre" data-i18n="general.switzerland">İsviçre</option>
+                        <option value="ABD" data-i18n="general.usa">ABD</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="search-input">
+                        <i class="fas fa-search"></i>
+                        <span data-i18n="filter.search">Arama</span>
+                    </label>
+                    <input type="text" id="search-input" data-i18n-placeholder="general.searchPlaceholder" placeholder="Ürün adı veya CAS numarası...">
+                </div>
+            </div>
+
+            <div class="product-grid" id="product-list-grid">
+                <!-- Ürünler buraya JavaScript ile eklenecek -->
+            </div>
+
+            <div class="products-cta reveal">
+                <div class="cta-content">
+                    <h2 data-i18n="general.customProductionNeeds">Özel Üretim İhtiyaçlarınız mı Var?</h2>
+                    <p data-i18n="general.customProductionDesc">Standart ürünlerimizin yanı sıra, özel formülasyonlar ve özel üretim çözümleri de sunuyoruz.</p>
+                    <a href="/iletisim.html" class="btn btn-primary">
+                        <i class="fas fa-handshake"></i>
+                        <span data-i18n="general.getQuote">Teklif Alın</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-flask"></i>
+                        <span data-i18n="general.companyName">Okan'ın Kozmetiği</span>
+                    </div>
+                    <p data-i18n="general.companyDesc">Bilim ve güzelliği buluşturan yenilikçi çözümler.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4 data-i18n="general.quickLinks">Hızlı Linkler</h4>
+                    <ul>
+                        <li><a href="/urunler/" data-i18n="menu.products">Ürünler</a></li>
+                        <li><a href="/hakkimizda.html" data-i18n="menu.about">Hakkımızda</a></li>
+                        <li><a href="/iletisim.html" data-i18n="menu.contact">İletişim</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 data-i18n="general.contact">İletişim</h4>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+90 212 552 00 39</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>info@okaninkozmetigi.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Halide Edip Adıvar Cd. No:21, Esenyurt/İstanbul</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 <span data-i18n="general.companyName">Okan'ın Kozmetiği</span> <span data-i18n="general.rights">Tüm hakları saklıdır.</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/products.js"></script>
+    <script src="/js/script.js"></script>
+    <script src="/js/chatbot.js"></script>
+</body>
+</html> 

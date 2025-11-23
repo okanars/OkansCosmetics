@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">Sitrik Asit - Okan'ın Kozmetiği</title>
+    <meta name="description" id="page-description" content="Kozmetik formülasyonlarda pH dengesini ayarlamak için kullanılır.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/css/chatbot.css">
+</head>
+<body>
+
+    <header>
+        <nav class="container">
+            <a href="/index.html" class="logo">
+                <i class="fas fa-flask"></i>
+                <span>Okan'ın Kozmetiği</span>
+            </a>
+            <div class="nav-links">
+                <a href="/index.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>Ana Sayfa</span>
+                </a>
+                <a href="/urunler/index.html" class="nav-link">
+                    <i class="fas fa-cube"></i>
+                    <span>Ürünler</span>
+                </a>
+                <a href="/hakkimizda.html" class="nav-link">
+                    <i class="fas fa-users"></i>
+                    <span>Hakkımızda</span>
+                </a>
+                <a href="/iletisim.html" class="nav-link">
+                    <i class="fas fa-envelope"></i>
+                    <span>İletişim</span>
+                </a>
+            </div>
+            <button class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="product-hero">
+            <div class="container">
+                <div class="breadcrumb reveal">
+                    <a href="/index.html">
+                        <i class="fas fa-home"></i>
+                        <span>Ana Sayfa</span>
+                    </a>
+                    <i class="fas fa-chevron-right"></i>
+                    <a href="/urunler/index.html">Ürünler</a>
+                    <i class="fas fa-chevron-right"></i>
+                    <span id="breadcrumb-product">Sitrik Asit</span>
+                </div>
+                
+                <div class="product-detail-container reveal">
+                    <div class="product-image-gallery">
+                        <div class="main-image">
+                            <img id="product-main-image" src="" alt="" loading="lazy">
+                        </div>
+                        <div class="product-badges">
+                            <span id="product-category" class="badge badge-primary"></span>
+                            <span id="product-origin" class="badge badge-secondary"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="product-info">
+                        <h1 id="product-name"></h1>
+                        <p id="product-description" class="product-description"></p>
+                        
+                        <div class="product-specs">
+                            <div class="spec-item">
+                                <i class="fas fa-flask"></i>
+                                <div>
+                                    <label>CAS Numarası</label>
+                                    <span id="product-cas"></span>
+                                </div>
+                            </div>
+                            <div class="spec-item">
+                                <i class="fas fa-cube"></i>
+                                <div>
+                                    <label>Form</label>
+                                    <span id="product-form"></span>
+                                </div>
+                            </div>
+                            <div class="spec-item">
+                                <i class="fas fa-globe"></i>
+                                <div>
+                                    <label>Menşei</label>
+                                    <span id="product-origin-spec"></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="product-actions">
+                            <a href="/iletisim.html" class="btn btn-primary">
+                                <i class="fas fa-envelope"></i>
+                                <span>Teklif Alın</span>
+                            </a>
+                            <a href="/urunler/index.html" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i>
+                                <span>Tüm Ürünler</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="product-details container">
+            <div class="details-grid">
+                <div class="detail-card reveal">
+                    <div class="card-header">
+                        <i class="fas fa-list"></i>
+                        <h3>Kullanım Alanları</h3>
+                    </div>
+                    <div class="card-content">
+                        <ul id="product-applications" class="applications-list">
+                            <!-- Uygulamalar buraya eklenecek -->
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="detail-card reveal">
+                    <div class="card-header">
+                        <i class="fas fa-info-circle"></i>
+                        <h3>Teknik Özellikler</h3>
+                    </div>
+                    <div class="card-content">
+                        <div id="product-specifications" class="specifications">
+                            <!-- Teknik özellikler buraya eklenecek -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="detail-card reveal">
+                    <div class="card-header">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Güvenlik ve Uyumluluk</h3>
+                    </div>
+                    <div class="card-content">
+                        <div id="product-safety" class="safety-info">
+                            <!-- Güvenlik bilgileri buraya eklenecek -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="detail-card reveal">
+                    <div class="card-header">
+                        <i class="fas fa-download"></i>
+                        <h3>Dokümantasyon</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="documentation-links">
+                            <a href="#" class="doc-link">
+                                <i class="fas fa-file-pdf"></i>
+                                <span>Teknik Veri Sayfası</span>
+                            </a>
+                            <a href="#" class="doc-link">
+                                <i class="fas fa-file-alt"></i>
+                                <span>Güvenlik Veri Sayfası</span>
+                            </a>
+                            <a href="#" class="doc-link">
+                                <i class="fas fa-certificate"></i>
+                                <span>Analiz Sertifikası</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="related-products container">
+            <div class="section-header reveal">
+                <h2>Benzer Ürünler</h2>
+                <p>Aynı kategorideki diğer ürünlerimizi keşfedin</p>
+            </div>
+            <div class="related-grid" id="related-products">
+                <!-- Benzer ürünler buraya eklenecek -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-flask"></i>
+                        <span>Okan'ın Kozmetiği A.Ş.</span>
+                    </div>
+                    <p>Bilim ve güzelliği buluşturan yenilikçi çözümler.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Hızlı Linkler</h4>
+                    <ul>
+                        <li><a href="/urunler/">Ürünler</a></li>
+                        <li><a href="/hakkimizda.html">Hakkımızda</a></li>
+                        <li><a href="/iletisim.html">İletişim</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>İletişim</h4>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+90 212 552 00 39</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>info@okaninkozmetigi.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>İstanbul, Türkiye</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Okan'ın Kozmetiği A.Ş. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/products.js"></script>
+    <script src="/js/product-detail.js"></script>
+    <script src="/js/script.js"></script>
+    <script src="/js/chatbot.js"></script>
+</body>
+</html> 
