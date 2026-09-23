@@ -1,316 +1,259 @@
-const products = [
+// Samtida Cosmetics — ürün grupları, seriler ve ürün kataloğu
+// Metinler { tr, en, ru } şeklinde tutulur; aktif dil SamtidaI18n.pick() ile seçilir.
+
+window.SAMTIDA_CATEGORIES = [
     {
-        id: 1,
-        name: "Sodyum Lauril Sülfat (SLS)",
-        cas: "151-21-3",
-        origin: "Almanya",
-        form: "Toz / Granül",
-        applications: ["Şampuan", "Duş Jeli", "Diş Macunu", "Sıvı Sabun"],
-        description: "Yüksek köpürme kapasitesine sahip etkili bir yüzey aktif maddedir.",
-        image: "/images/products/sls.jpg",
-        category: "surfaktan",
-        slug: "sodyum-lauril-sulfat"
+        slug: 'dispenserler',
+        image: '/images/samtida/cat-dispenser.jpg',
+        name: { tr: 'Dispenserler', en: 'Dispensers', ru: 'Диспенсеры' },
+        desc: {
+            tr: 'Duş jeli, şampuan ve sıvı sabun için kartuşlu ve doldurulabilir dispenser sistemleri.',
+            en: 'Cartridge and refillable dispenser systems for shower gel, shampoo and liquid soap.',
+            ru: 'Картриджные и многоразовые диспенсеры для геля для душа, шампуня и жидкого мыла.'
+        }
     },
     {
-        id: 2,
-        name: "Sitrik Asit",
-        cas: "77-92-9",
-        origin: "Çin",
-        form: "Kristal Toz",
-        applications: ["pH Ayarlayıcı", "Şelasyon Ajanı", "Tonik", "Krem"],
-        description: "Kozmetik formülasyonlarda pH dengesini ayarlamak için kullanılır.",
-        image: "/images/products/citric-acid.jpg",
-        category: "aktif",
-        slug: "sitrik-asit"
+        slug: 'sabunlar',
+        image: '/images/samtida/cat-soap.jpg',
+        name: { tr: 'Sabunlar', en: 'Soaps', ru: 'Мыло' },
+        desc: {
+            tr: 'Farklı form, koku ve gramaj seçenekleriyle özel ambalajlı otel sabunları.',
+            en: 'Hotel soaps in custom packaging with a choice of shapes, scents and weights.',
+            ru: 'Гостиничное мыло в фирменной упаковке разных форм, ароматов и веса.'
+        }
     },
     {
-        id: 3,
-        name: "Gliserin (Bitkisel)",
-        cas: "56-81-5",
-        origin: "Malezya",
-        form: "Sıvı",
-        applications: ["Nemlendirici", "Losyon", "Krem", "Maske"],
-        description: "Cildi nemlendirme ve pürüzsüzleştirme özelliğine sahip bir humektandır.",
-        image: "/images/products/glycerin.jpg",
-        category: "nemlendirici",
-        slug: "gliserin"
+        slug: 'siseler',
+        image: '/images/samtida/cat-bottle.jpg',
+        name: { tr: 'Şişeler', en: 'Bottles', ru: 'Флаконы' },
+        desc: {
+            tr: 'Şampuan, saç kremi, duş jeli ve losyon için markanıza özel tasarlanmış şişeler.',
+            en: 'Bottles for shampoo, conditioner, shower gel and lotion, designed for your brand.',
+            ru: 'Флаконы для шампуня, кондиционера, геля для душа и лосьона в дизайне вашего бренда.'
+        }
     },
     {
-        id: 4,
-        name: "Ksantan Gam (Xanthan Gum)",
-        cas: "11138-66-2",
-        origin: "Avusturya",
-        form: "Toz",
-        applications: ["Kıvamlaştırıcı", "Jel", "Losyon", "Serum"],
-        description: "Su bazlı ürünlerde stabilite ve kıvam sağlamak için kullanılır.",
-        image: "/images/products/xanthan-gum.jpg",
-        category: "kivam",
-        slug: "ksantan-gam"
+        slug: 'kisisel-bakim',
+        image: '/images/samtida/cat-personal.jpg',
+        name: { tr: 'Kişisel Bakım Ürünleri', en: 'Personal Care Products', ru: 'Средства личной гигиены' },
+        desc: {
+            tr: 'El ve vücut kremleri, banyo tuzları ve misafir konforunu artıran bakım ürünleri.',
+            en: 'Hand and body creams, bath salts and care products that elevate guest comfort.',
+            ru: 'Кремы для рук и тела, соли для ванн и средства ухода для комфорта гостей.'
+        }
     },
     {
-        id: 5,
-        name: "Setil Alkol",
-        cas: "36653-82-4",
-        origin: "Hindistan",
-        form: "Pul / Mumsu Katı",
-        applications: ["Emülgatör", "Kıvamlaştırıcı", "Krem", "Saç Kremi"],
-        description: "Emülsiyonları stabilize eden ve ürünlere kıvam veren yağ alkolü.",
-        image: "/images/products/cetyl-alcohol.jpg",
-        category: "kivam",
-        slug: "setil-alkol"
-    },
-    {
-        id: 6,
-        name: "Niasinamid (Vitamin B3)",
-        cas: "98-92-0",
-        origin: "İsviçre",
-        form: "Toz",
-        applications: ["Aktif İçerik", "Serum", "Leke Kremi", "Yaşlanma Karşıtı"],
-        description: "Cilt bariyerini güçlendiren, leke ve gözenek görünümünü azaltan aktif.",
-        image: "/images/products/niacinamide.jpg",
-        category: "aktif",
-        slug: "niasinamid"
-    },
-    {
-        id: 7,
-        name: "Tokoferil Asetat (Vitamin E)",
-        cas: "7695-91-2",
-        origin: "Almanya",
-        form: "Yağlı Sıvı",
-        applications: ["Antioksidan", "Nemlendirici", "Güneş Sonrası Ürünler"],
-        description: "Güçlü bir antioksidan olup, cildi serbest radikallere karşı korur.",
-        image: "/images/products/vitamin-e.jpg",
-        category: "aktif",
-        slug: "vitamin-e"
-    },
-    {
-        id: 8,
-        name: "Fenoksietanol",
-        cas: "122-99-6",
-        origin: "ABD",
-        form: "Sıvı",
-        applications: ["Koruyucu", "Tüm Kozmetik Ürünler"],
-        description: "Geniş spektrumlu bir koruyucu olarak ürünlerin raf ömrünü uzatır.",
-        image: "/images/products/phenoxyethanol.jpg",
-        category: "koruyucu",
-        slug: "fenoksietanol"
-    },
-    {
-        id: 9,
-        name: "Kaprilik/Kaprik Trigliserit",
-        cas: "73398-61-5",
-        origin: "Almanya",
-        form: "Sıvı Yağ",
-        applications: ["Yumuşatıcı (Emollient)", "Taşıyıcı Yağ", "Makyaj Temizleyici"],
-        description: "Hindistancevizi yağından elde edilen, cilde ipeksi bir his veren yumuşatıcı.",
-        image: "/images/products/caprylic-triglyceride.jpg",
-        category: "nemlendirici",
-        slug: "kaprilik-trigliserit"
-    },
-    {
-        id: 10,
-        name: "Hyaluronik Asit",
-        cas: "9004-61-9",
-        origin: "Güney Kore",
-        form: "Toz",
-        applications: ["Nemlendirici", "Serum", "Yaşlanma Karşıtı", "Dolgunlaştırıcı"],
-        description: "Kendi ağırlığının 1000 katı su tutma kapasitesine sahip süper nemlendirici.",
-        image: "/images/products/hyaluronic-acid.jpg",
-        category: "nemlendirici",
-        slug: "hyaluronik-asit"
-    },
-    {
-        id: 11,
-        name: "Cocamidopropyl Betaine",
-        cas: "61789-40-0",
-        origin: "Türkiye",
-        form: "Sıvı",
-        applications: ["Yardımcı Sürfaktan", "Köpük Arttırıcı", "Şampuan", "Duş Jeli"],
-        description: "Cildi tahriş etmeyen, köpük kalitesini artıran amfoterik bir sürfaktan.",
-        image: "/images/products/cocamidopropyl-betaine.jpg",
-        category: "surfaktan",
-        slug: "cocamidopropyl-betaine"
-    },
-    {
-        id: 12,
-        name: "Shea Yağı (Butyrospermum Parkii Butter)",
-        cas: "91080-23-8",
-        origin: "Gana",
-        form: "Yumuşak Katı",
-        applications: ["Nemlendirici", "Vücut Yağı", "Dudak Balsamı"],
-        description: "Vitaminler ve yağ asitleri açısından zengin, yoğun besleyici bir yağ.",
-        image: "/images/products/shea-butter.jpg",
-        category: "nemlendirici",
-        slug: "shea-yagi"
-    },
-    {
-        id: 13,
-        name: "Titanyum Dioksit",
-        cas: "13463-67-7",
-        origin: "Finlandiya",
-        form: "Toz",
-        applications: ["UV Filtre", "Güneş Kremi", "Makyaj Ürünleri"],
-        description: "Geniş spektrumlu koruma sağlayan etkili bir fiziksel UV filtresi.",
-        image: "/images/products/titanium-dioxide.jpg",
-        category: "aktif",
-        slug: "titanyum-dioksit"
-    },
-    {
-        id: 14,
-        name: "Pantenol (Provitamin B5)",
-        cas: "81-13-0",
-        origin: "İsviçre",
-        form: "Sıvı / Toz",
-        applications: ["Nemlendirici", "Onarıcı", "Saç Bakım", "Cilt Bakım"],
-        description: "Cildi ve saçı nemlendiren, onaran ve yatıştıran bir vitamindir.",
-        image: "/images/products/panthenol.jpg",
-        category: "nemlendirici",
-        slug: "pantenol"
-    },
-    {
-        id: 15,
-        name: "Salisilik Asit",
-        cas: "69-72-7",
-        origin: "Çin",
-        form: "Kristal Toz",
-        applications: ["Akne Karşıtı", "Peeling", "Tonik", "Temizleyici"],
-        description: "Gözenekleri temizleyen ve sivilce oluşumunu önleyen bir beta-hidroksi asit (BHA).",
-        image: "/images/products/salicylic-acid.jpg",
-        category: "aktif",
-        slug: "salisilik-asit"
-    },
-    {
-        id: 16,
-        name: "Çinko Oksit",
-        cas: "1314-13-2",
-        origin: "Peru",
-        form: "Toz",
-        applications: ["UV Filtre", "Pişik Kremi", "Güneş Kremi"],
-        description: "UVA ve UVB ışınlarına karşı koruma sağlayan mineral bir güneş filtresi.",
-        image: "/images/products/zinc-oxide.jpg",
-        category: "aktif",
-        slug: "cinko-oksit"
-    },
-    {
-        id: 17,
-        name: "Askorbik Asit (Vitamin C)",
-        cas: "50-81-7",
-        origin: "İngiltere",
-        form: "Toz",
-        applications: ["Antioksidan", "Leke Karşıtı", "Serum", "Yaşlanma Karşıtı"],
-        description: "Cilt tonunu eşitleyen ve kolajen üretimini destekleyen güçlü antioksidan.",
-        image: "/images/products/vitamin-c.jpg",
-        category: "aktif",
-        slug: "vitamin-c"
-    },
-    {
-        id: 18,
-        name: "Carbomer",
-        cas: "9003-01-4",
-        origin: "Belçika",
-        form: "Toz",
-        applications: ["Kıvamlaştırıcı", "Jel Yapıcı", "Serum", "El Dezenfektanı"],
-        description: "Düşük kullanım oranlarında bile yüksek viskoziteli jeller oluşturan polimer.",
-        image: "/images/products/carbomer.jpg",
-        category: "kivam",
-        slug: "carbomer"
-    },
-    {
-        id: 19,
-        name: "Propilen Glikol",
-        cas: "57-55-6",
-        origin: "Almanya",
-        form: "Sıvı",
-        applications: ["Nemlendirici", "Çözücü", "Krem", "Losyon"],
-        description: "Diğer maddelerin cilde nüfuz etmesine yardımcı olan bir humektan ve çözücü.",
-        image: "/images/products/propylene-glycol.jpg",
-        category: "nemlendirici",
-        slug: "propilen-glikol"
-    },
-    {
-        id: 20,
-        name: "Polisorbat 20",
-        cas: "9005-64-5",
-        origin: "Fransa",
-        form: "Sıvı",
-        applications: ["Çözücü (Solubilizer)", "Emülgatör", "Tonik", "Vücut Spreyi"],
-        description: "Esansiyel yağlar gibi yağ bazlı bileşenlerin su içinde çözünmesini sağlar.",
-        image: "/images/products/polysorbate.jpg",
-        category: "surfaktan",
-        slug: "polisorbat-20"
+        slug: 'tamamlayici',
+        image: '/images/samtida/cat-complementary.jpg',
+        name: { tr: 'Tamamlayıcı Ürünler', en: 'Complementary Products', ru: 'Дополнительные товары' },
+        desc: {
+            tr: 'Vanity, diş, tıraş ve dikiş setleri; terlik ve tarak gibi tamamlayıcı aksesuarlar.',
+            en: 'Vanity, dental, shaving and sewing kits plus accessories such as slippers and combs.',
+            ru: 'Косметические, зубные, бритвенные и швейные наборы, тапочки, расчёски и аксессуары.'
+        }
     }
 ];
 
-// Category mapping for display
-const categoryNames = {
-    'surfaktan': 'Sürfaktanlar',
-    'nemlendirici': 'Nemlendiriciler',
-    'koruyucu': 'Koruyucular',
-    'aktif': 'Aktif İçerikler',
-    'kivam': 'Kıvamlaştırıcılar'
+window.SAMTIDA_SERIES = {
+    'pure-blanc': { tr: 'Pure Blanc', en: 'Pure Blanc', ru: 'Pure Blanc' },
+    'ambre-noir': { tr: 'Ambre Noir', en: 'Ambre Noir', ru: 'Ambre Noir' },
+    'lavanda': { tr: 'Lavanda', en: 'Lavanda', ru: 'Lavanda' }
 };
 
-// Function to load products on the products page
-function loadProducts() {
-    const productGrid = document.getElementById('product-list-grid');
-    if (!productGrid) return;
-
-    products.forEach((product, index) => {
-        const cardLink = document.createElement('a');
-        cardLink.href = `/urunler/${product.slug}.html`;
-        cardLink.className = 'product-card reveal';
-        cardLink.setAttribute('data-category', product.category.toLowerCase());
-        cardLink.setAttribute('data-origin', product.origin);
-        cardLink.style.animationDelay = `${index * 0.1}s`;
-
-        const imageWrapper = document.createElement('div');
-        imageWrapper.className = 'product-card-image-wrapper';
-
-        const img = document.createElement('img');
-        img.src = product.image;
-        img.alt = product.name;
-        img.className = 'product-card-image';
-        img.loading = 'lazy';
-        imageWrapper.appendChild(img);
-
-        const content = document.createElement('div');
-        content.className = 'product-card-content';
-
-        const title = document.createElement('h3');
-        title.textContent = product.name;
-        
-        const description = document.createElement('p');
-        description.textContent = product.description;
-
-        const meta = document.createElement('div');
-        meta.className = 'product-meta';
-
-        const categorySpan = document.createElement('span');
-        categorySpan.textContent = categoryNames[product.category] || product.category;
-        meta.appendChild(categorySpan);
-
-        const originSpan = document.createElement('span');
-        originSpan.textContent = product.origin;
-        meta.appendChild(originSpan);
-
-        const casSpan = document.createElement('span');
-        casSpan.textContent = `CAS: ${product.cas}`;
-        meta.appendChild(casSpan);
-
-        content.appendChild(title);
-        content.appendChild(description);
-        content.appendChild(meta);
-
-        cardLink.appendChild(imageWrapper);
-        cardLink.appendChild(content);
-
-        productGrid.appendChild(cardLink);
-    });
-}
-
-// Load products when DOM is ready
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', loadProducts);
-} else {
-    loadProducts();
-} 
+window.SAMTIDA_PRODUCTS = [
+    // Dispenserler
+    {
+        id: 'duvar-tipi-kartuslu-dispenser', category: 'dispenserler', series: 'pure-blanc', size: '300 ml', moq: 100,
+        image: '/images/samtida/cat-dispenser.jpg',
+        name: { tr: 'Duvar Tipi Kartuşlu Dispenser', en: 'Wall-Mounted Cartridge Dispenser', ru: 'Настенный картриджный диспенсер' },
+        desc: {
+            tr: 'Kilitli gövdesi ve hijyenik kartuş sistemiyle israfı önleyen, kolay değiştirilebilir dispenser.',
+            en: 'A lockable dispenser with a hygienic cartridge system that prevents waste and is easy to replace.',
+            ru: 'Запираемый диспенсер с гигиеничной картриджной системой, исключающей потери и лёгкой в замене.'
+        }
+    },
+    {
+        id: 'uclu-dispenser-seti', category: 'dispenserler', series: 'ambre-noir', size: '3 × 300 ml', moq: 50,
+        image: '/images/samtida/hero-dispenser.jpg',
+        name: { tr: 'Üçlü Dispenser Seti', en: 'Triple Dispenser Set', ru: 'Тройной набор диспенсеров' },
+        desc: {
+            tr: 'Şampuan, saç kremi ve duş jeli için tek askılı paslanmaz çelik braket üzerinde üçlü set.',
+            en: 'A three-piece set for shampoo, conditioner and shower gel on a single stainless steel bracket.',
+            ru: 'Набор из трёх диспенсеров для шампуня, кондиционера и геля на едином кронштейне из нержавеющей стали.'
+        }
+    },
+    {
+        id: 'doldurulabilir-seramik-dispenser', category: 'dispenserler', series: 'lavanda', size: '350 ml', moq: 100,
+        image: '/images/samtida/about-bathroom.jpg',
+        name: { tr: 'Doldurulabilir Seramik Dispenser', en: 'Refillable Ceramic Dispenser', ru: 'Многоразовый керамический диспенсер' },
+        desc: {
+            tr: 'Tezgah üstü kullanım için mat seramik gövdeli, pompalı ve tekrar doldurulabilir dispenser.',
+            en: 'A countertop dispenser with a matte ceramic body and pump, designed to be refilled.',
+            ru: 'Настольный диспенсер с матовым керамическим корпусом и помпой для повторного наполнения.'
+        }
+    },
+    {
+        id: 'sensorlu-temassiz-dispenser', category: 'dispenserler', series: 'pure-blanc', size: '500 ml', moq: 50,
+        image: '/images/samtida/standards-room.jpg',
+        name: { tr: 'Sensörlü Temassız Dispenser', en: 'Touch-Free Sensor Dispenser', ru: 'Сенсорный бесконтактный диспенсер' },
+        desc: {
+            tr: 'Kızılötesi sensörlü, pil ile çalışan ve ortak alanlar için ideal temassız sabun dispenseri.',
+            en: 'A battery-powered infrared sensor soap dispenser, ideal for public areas.',
+            ru: 'Бесконтактный дозатор мыла с ИК-датчиком на батарейках, идеален для общих зон.'
+        }
+    },
+    // Sabunlar
+    {
+        id: 'kare-otel-sabunu', category: 'sabunlar', series: 'pure-blanc', size: '20 g', moq: 5000,
+        image: '/images/samtida/cat-soap.jpg',
+        name: { tr: 'Kare Otel Sabunu', en: 'Square Hotel Soap', ru: 'Квадратное гостиничное мыло' },
+        desc: {
+            tr: 'Bitkisel bazlı, nemlendirici formüllü ve logonuza özel baskılı kutuda kare sabun.',
+            en: 'A plant-based square soap with a moisturising formula, in a box printed with your logo.',
+            ru: 'Квадратное мыло на растительной основе с увлажняющей формулой в коробке с вашим логотипом.'
+        }
+    },
+    {
+        id: 'oval-bitkisel-sabun', category: 'sabunlar', series: 'lavanda', size: '30 g', moq: 5000,
+        image: '/images/samtida/series-lavender.jpg',
+        name: { tr: 'Oval Bitkisel Sabun', en: 'Oval Botanical Soap', ru: 'Овальное растительное мыло' },
+        desc: {
+            tr: 'Lavanta özlü, cildi kurutmayan oval form bitkisel sabun; plise veya kutu ambalaj.',
+            en: 'An oval botanical soap with lavender extract that does not dry the skin; pleated or boxed.',
+            ru: 'Овальное растительное мыло с экстрактом лаванды, не сушит кожу; плиссе или коробка.'
+        }
+    },
+    {
+        id: 'zeytinyagli-dogal-sabun', category: 'sabunlar', series: 'ambre-noir', size: '40 g', moq: 3000,
+        image: '/images/samtida/parallax-production.jpg',
+        name: { tr: 'Zeytinyağlı Doğal Sabun', en: 'Natural Olive Oil Soap', ru: 'Натуральное оливковое мыло' },
+        desc: {
+            tr: 'Soğuk işlem zeytinyağı bazlı, parfümsüz seçeneği de bulunan premium doğal sabun.',
+            en: 'A premium cold-process olive oil soap, also available fragrance-free.',
+            ru: 'Премиальное мыло холодного отжима на оливковом масле, есть вариант без отдушки.'
+        }
+    },
+    {
+        id: 'plise-ambalajli-sabun', category: 'sabunlar', series: 'pure-blanc', size: '15 g', moq: 10000,
+        image: '/images/samtida/page-spa.jpg',
+        name: { tr: 'Plise Ambalajlı Sabun', en: 'Pleat-Wrapped Soap', ru: 'Мыло в плиссированной упаковке' },
+        desc: {
+            tr: 'Ekonomik otel konseptleri için plise kağıt ambalajlı, hafif kokulu mini sabun.',
+            en: 'A lightly scented mini soap in pleated paper wrap for economy hotel concepts.',
+            ru: 'Мини-мыло с лёгким ароматом в плиссированной бумаге для эконом-концепций.'
+        }
+    },
+    // Şişeler
+    {
+        id: 'sampuan-30ml', category: 'siseler', series: 'pure-blanc', size: '30 ml', moq: 5000,
+        image: '/images/samtida/cat-bottle.jpg',
+        name: { tr: 'Şampuan', en: 'Shampoo', ru: 'Шампунь' },
+        desc: {
+            tr: 'Tüm saç tipleri için pH dengeli, parabensiz şampuan; flip-top kapaklı şişede.',
+            en: 'A pH-balanced, paraben-free shampoo for all hair types in a flip-top bottle.',
+            ru: 'Шампунь без парабенов со сбалансированным pH для всех типов волос во флаконе с откидной крышкой.'
+        }
+    },
+    {
+        id: 'dus-jeli-30ml', category: 'siseler', series: 'ambre-noir', size: '30 ml', moq: 5000,
+        image: '/images/samtida/about-bathroom.jpg',
+        name: { tr: 'Duş Jeli', en: 'Shower Gel', ru: 'Гель для душа' },
+        desc: {
+            tr: 'Amber ve sandal ağacı notalı, yoğun köpüklü ve cilt dostu duş jeli.',
+            en: 'A rich-lather, skin-friendly shower gel with amber and sandalwood notes.',
+            ru: 'Мягкий для кожи гель для душа с густой пеной и нотами амбры и сандала.'
+        }
+    },
+    {
+        id: 'sac-kremi-30ml', category: 'siseler', series: 'lavanda', size: '30 ml', moq: 5000,
+        image: '/images/samtida/series-amber.jpg',
+        name: { tr: 'Saç Kremi', en: 'Conditioner', ru: 'Кондиционер' },
+        desc: {
+            tr: 'Kolay tarama sağlayan, lavanta özlü hafif dokulu saç kremi.',
+            en: 'A lightweight lavender conditioner that makes combing easy.',
+            ru: 'Лёгкий кондиционер с лавандой для лёгкого расчёсывания.'
+        }
+    },
+    {
+        id: 'vucut-losyonu-30ml', category: 'siseler', series: 'pure-blanc', size: '30 ml', moq: 5000,
+        image: '/images/samtida/hero-series.jpg',
+        name: { tr: 'Vücut Losyonu', en: 'Body Lotion', ru: 'Лосьон для тела' },
+        desc: {
+            tr: 'Shea yağı ve E vitamini içeren, hızlı emilen nemlendirici vücut losyonu.',
+            en: 'A fast-absorbing moisturising body lotion with shea butter and vitamin E.',
+            ru: 'Быстро впитывающийся увлажняющий лосьон с маслом ши и витамином E.'
+        }
+    },
+    // Kişisel bakım
+    {
+        id: 'el-kremi', category: 'kisisel-bakim', series: 'lavanda', size: '50 ml', moq: 2000,
+        image: '/images/samtida/cat-personal.jpg',
+        name: { tr: 'El Kremi', en: 'Hand Cream', ru: 'Крем для рук' },
+        desc: {
+            tr: 'Yağlı his bırakmayan, gliserin ve bitkisel yağlarla zenginleştirilmiş el kremi.',
+            en: 'A non-greasy hand cream enriched with glycerin and botanical oils.',
+            ru: 'Нежирный крем для рук с глицерином и растительными маслами.'
+        }
+    },
+    {
+        id: 'banyo-tuzu', category: 'kisisel-bakim', series: 'ambre-noir', size: '100 g', moq: 1000,
+        image: '/images/samtida/hero-series.jpg',
+        name: { tr: 'Banyo Tuzu', en: 'Bath Salt', ru: 'Соль для ванн' },
+        desc: {
+            tr: 'Mineral bakımından zengin deniz tuzu ve esansiyel yağlarla rahatlatıcı banyo tuzu.',
+            en: 'A relaxing bath salt of mineral-rich sea salt and essential oils.',
+            ru: 'Расслабляющая соль для ванн из богатой минералами морской соли и эфирных масел.'
+        }
+    },
+    {
+        id: 'vucut-kremi', category: 'kisisel-bakim', series: 'pure-blanc', size: '150 ml', moq: 1000,
+        image: '/images/samtida/series-amber.jpg',
+        name: { tr: 'Vücut Kremi', en: 'Body Cream', ru: 'Крем для тела' },
+        desc: {
+            tr: 'Spa ve suit odalar için yoğun nemlendirici, kavanoz ambalajlı premium vücut kremi.',
+            en: 'A rich premium body cream in a jar for spas and suites.',
+            ru: 'Насыщенный премиальный крем для тела в баночке для спа и люксов.'
+        }
+    },
+    // Tamamlayıcı
+    {
+        id: 'vanity-seti', category: 'tamamlayici', series: 'pure-blanc', size: '1 set', moq: 5000,
+        image: '/images/samtida/cat-complementary.jpg',
+        name: { tr: 'Vanity Seti', en: 'Vanity Kit', ru: 'Косметический набор' },
+        desc: {
+            tr: 'Pamuk ped ve kulak çubuğundan oluşan, geri dönüştürülebilir kutuda vanity seti.',
+            en: 'A vanity kit with cotton pads and cotton buds in a recyclable box.',
+            ru: 'Набор из ватных дисков и палочек в перерабатываемой коробке.'
+        }
+    },
+    {
+        id: 'dis-bakim-seti', category: 'tamamlayici', series: 'ambre-noir', size: '1 set', moq: 5000,
+        image: '/images/samtida/standards-room.jpg',
+        name: { tr: 'Diş Bakım Seti', en: 'Dental Kit', ru: 'Зубной набор' },
+        desc: {
+            tr: 'Bambu saplı diş fırçası ve mini diş macunundan oluşan çevre dostu set.',
+            en: 'An eco-friendly kit with a bamboo toothbrush and mini toothpaste.',
+            ru: 'Экологичный набор: бамбуковая зубная щётка и мини-паста.'
+        }
+    },
+    {
+        id: 'tiras-seti', category: 'tamamlayici', series: 'ambre-noir', size: '1 set', moq: 3000,
+        image: '/images/samtida/parallax-hotel.jpg',
+        name: { tr: 'Tıraş Seti', en: 'Shaving Kit', ru: 'Бритвенный набор' },
+        desc: {
+            tr: 'Çift bıçaklı tıraş bıçağı ve tıraş köpüğünden oluşan, özel baskılı kutuda set.',
+            en: 'A twin-blade razor and shaving foam in a custom-printed box.',
+            ru: 'Двухлезвийная бритва и пена для бритья в коробке с вашей печатью.'
+        }
+    },
+    {
+        id: 'otel-terligi', category: 'tamamlayici', series: 'pure-blanc', size: '28 cm', moq: 2000,
+        image: '/images/samtida/hero-sets.jpg',
+        name: { tr: 'Otel Terliği', en: 'Hotel Slippers', ru: 'Гостиничные тапочки' },
+        desc: {
+            tr: 'Kaymaz tabanlı, havlu kumaş, logolu nakış seçenekli kapalı burun otel terliği.',
+            en: 'Closed-toe terry slippers with non-slip soles and optional logo embroidery.',
+            ru: 'Махровые тапочки с закрытым носком, нескользящей подошвой и вышивкой логотипа.'
+        }
+    }
+];

@@ -1,282 +1,126 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="tr" class="no-js">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hakkımızda - Okan'ın Kozmetiği</title>
-    <meta name="description" content="Okan'ın Kozmetiği hakkında detaylı bilgi ve şirket profili.">
-    <link rel="stylesheet" href="/css/style.css">
+    <title>Hakkımızda | Samtida Cosmetics</title>
+    <meta name="description" content="Samtida Cosmetics'in hikayesi, misyonu, vizyonu ve kalite politikası.">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2714%27 fill=%27%231a1a1a%27/%3E%3Ctext x=%2729%27 y=%2745%27 font-family=%27Montserrat,Arial%27 font-size=%2738%27 font-weight=%27600%27 fill=%27%23fff%27 text-anchor=%27middle%27%3ES%3C/text%3E%3Ccircle cx=%2749%27 cy=%2718%27 r=%275%27 fill=%27%23ee6e01%27/%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="/css/chatbot.css">
-    <script src="/js/lang.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
-<body>
-
-    <header>
-        <nav class="container">
-            <a href="/index.html" class="logo">
-                <i class="fas fa-flask"></i>
-                <span data-i18n="general.companyName">Okan'ın Kozmetiği</span>
-            </a>
-            <div class="nav-right">
-                <div class="nav-links">
-                    <a href="/index.html" class="nav-link" data-i18n="menu.home">
-                        <i class="fas fa-home"></i>
-                        Ana Sayfa
-                    </a>
-                    <a href="/urunler/index.html" class="nav-link" data-i18n="menu.products">
-                        <i class="fas fa-cube"></i>
-                        Ürünler
-                    </a>
-                    <a href="/hakkimizda.html" class="nav-link" data-i18n="menu.about">
-                        <i class="fas fa-users"></i>
-                        Hakkımızda
-                    </a>
-                    <a href="/iletisim.html" class="nav-link" data-i18n="menu.contact">
-                        <i class="fas fa-envelope"></i>
-                        İletişim
-                    </a>
-                </div>
-                <div class="lang-selector-wrapper" id="lang-selector-wrapper">
-                    <!-- Dil seçici JS tarafından buraya eklenecek -->
-                </div>
-                <button class="menu-toggle">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-            </div>
-        </nav>
-    </header>
+<body data-title="meta.about">
 
     <main>
-        <section class="page-hero">
+        <section class="page-hero" style="background-image:url('/images/samtida/page-banner.jpg')">
             <div class="container">
-                <div class="page-hero-content reveal">
-                    <div class="page-badge">
-                        <i class="fas fa-star"></i>
-                        <span data-i18n="about.pageBadge">Şirket Profili</span>
+                <nav class="breadcrumb" aria-label="breadcrumb"><a href="/index.html" data-i18n="nav.home">Anasayfa</a><span class="sep">/</span><span data-i18n="nav.about">Hakkımızda</span></nav>
+                <h1 data-i18n="nav.about">Hakkımızda</h1>
+                <p data-i18n="about.hero">Konaklama sektörü için tasarlanan, üretilen ve özenle paketlenen banyo kozmetiklerinin arkasındaki ekip.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container split">
+                <div data-anim="fade-left">
+                    <span class="eyebrow" data-i18n="about.storyEyebrow">Hikayemiz</span>
+                    <h2 class="section-title" data-i18n-html="about.storyTitle">Ham Maddeden <strong>Misafir Odasına</strong></h2>
+                    <p data-i18n="about.story1">Samtida, 2010 yılında İstanbul'da kozmetik ham madde tedariki ile kuruldu. Formülasyon bilgimizi ve tedarik ağımızı zamanla otel kozmetiği üretimine taşıdık.</p>
+                    <p data-i18n="about.story2">Bugün şampuandan duş jeline, sabundan dispenser sistemlerine kadar yüzlerce ürünü kendi tesisimizde üretiyor; 70'ten fazla ülkede otellere, spa merkezlerine ve konaklama zincirlerine hizmet veriyoruz.</p>
+                    <p data-i18n="about.story3">Her iş ortağımız için ürünü; koku, ambalaj, renk ve logo baskısıyla birlikte baştan tasarlıyor, markanın misafir deneyimini banyoya kadar taşımasını sağlıyoruz.</p>
+                    <div class="stats">
+                        <div class="stat"><strong><span data-count="15">15</span><em>+</em></strong><span data-i18n="stats.years">Yıllık Deneyim</span></div>
+                        <div class="stat"><strong><span data-count="70">70</span><em>+</em></strong><span data-i18n="stats.countries">İhracat Ülkesi</span></div>
+                        <div class="stat"><strong><span data-count="500">500</span><em>+</em></strong><span data-i18n="stats.products">Ürün Çeşidi</span></div>
                     </div>
-                    <h1 data-i18n="about.title">Hakkımızda</h1>
-                    <p data-i18n="about.description">Bilim ve güzelliği buluşturan yenilikçi çözümler sunuyoruz</p>
+                </div>
+                <div class="split-img" data-anim="fade-right">
+                    <img src="/images/samtida/about-bathroom.jpg" alt="Samtida banyo ürünleri" loading="lazy">
                 </div>
             </div>
         </section>
 
-        <section class="about-story container">
-            <div class="story-grid">
-                <div class="story-content reveal">
-                    <div class="story-badge">
-                        <i class="fas fa-history"></i>
-                        <span data-i18n="about.storyBadge">Hikayemiz</span>
-                    </div>
-                    <h2 data-i18n="about.storyTitle">20 Yıllık Deneyim</h2>
-                    <p data-i18n="about.storyText1">2010 yılında kurulan Okan'ın Kozmetiği, kozmetik sektöründe kaliteli ham maddeler tedarik etmek amacıyla yola çıktı. Bugün 70'ten fazla ülkeye ihracat yaparak, global bir tedarikçi haline geldik.</p>
-                    <p data-i18n="about.storyText2">Deneyimli ekibimiz ve güçlü tedarikçi ağımızla, müşterilerimize en yüksek kalitede ürünler sunmaya devam ediyoruz.</p>
-                    <div class="story-stats">
-                        <div class="story-stat">
-                            <div class="stat-icon">
-                                <i class="fas fa-globe-americas"></i>
-                            </div>
-                            <div class="stat-info">
-                                <div class="stat-number">70+</div>
-                                <div class="stat-label" data-i18n="general.exportCountries">İhracat Ülkesi</div>
-                            </div>
-                        </div>
-                        <div class="story-stat">
-                            <div class="stat-icon">
-                                <i class="fas fa-users"></i>
-                            </div>
-                            <div class="stat-info">
-                                <div class="stat-number">500+</div>
-                                <div class="stat-label" data-i18n="general.happyCustomers">Mutlu Müşteri</div>
-                            </div>
-                        </div>
-                        <div class="story-stat">
-                            <div class="stat-icon">
-                                <i class="fas fa-certificate"></i>
-                            </div>
-                            <div class="stat-info">
-                                <div class="stat-number">20+</div>
-                                <div class="stat-label" data-i18n="general.yearsExperience">Yıllık Deneyim</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="story-image reveal">
-                    <div class="image-container">
-                        <div class="floating-elements">
-                            <div class="float-element element-1">
-                                <i class="fas fa-flask"></i>
-                            </div>
-                            <div class="float-element element-2">
-                                <i class="fas fa-microscope"></i>
-                            </div>
-                            <div class="float-element element-3">
-                                <i class="fas fa-atom"></i>
-                            </div>
-                        </div>
-                        <div class="main-image">
-                            <i class="fas fa-building"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="values-section">
+        <section class="section section-cream">
             <div class="container">
-                <div class="section-header reveal">
-                    <div class="section-badge">
-                        <i class="fas fa-heart"></i>
-                        <span data-i18n="about.valuesBadge">Değerlerimiz</span>
-                    </div>
-                    <h2 data-i18n="about.valuesTitle">Misyon ve Vizyonumuz</h2>
-                    <p data-i18n="about.valuesDescription">Kozmetik sektöründe güvenilir ve kaliteli tedarikçi olmak</p>
+                <div class="section-head center" data-anim="fade-up">
+                    <span class="eyebrow" data-i18n="about.valuesEyebrow">Değerlerimiz</span>
+                    <h2 class="section-title" data-i18n="about.valuesTitle">Misyon, Vizyon ve Kalite Politikası</h2>
                 </div>
-                <div class="values-grid">
-                    <div class="value-card reveal">
-                        <div class="value-icon">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <h3 data-i18n="about.qualityTitle">Kalite</h3>
-                        <p data-i18n="about.qualityDescription">Her ürünümüz uluslararası kalite standartlarında üretilir ve test edilir.</p>
+                <div class="card-grid cols-3">
+                    <div class="info-card" data-anim="fade-up">
+                        <i class="fas fa-bullseye card-icon"></i>
+                        <h3 data-i18n="about.mission">Misyonumuz</h3>
+                        <p data-i18n="about.missionText">Konaklama sektörüne; kaliteli, güvenli ve estetik ürünleri zamanında ve rekabetçi koşullarla sunarak iş ortaklarımızın misafir memnuniyetine değer katmak.</p>
                     </div>
-                    <div class="value-card reveal">
-                        <div class="value-icon">
-                            <i class="fas fa-handshake"></i>
-                        </div>
-                        <h3 data-i18n="about.reliabilityTitle">Güvenilirlik</h3>
-                        <p data-i18n="about.reliabilityDescription">Müşterilerimizle uzun vadeli, güvenilir iş ilişkileri kuruyoruz.</p>
+                    <div class="info-card" data-anim="fade-up">
+                        <i class="fas fa-eye card-icon"></i>
+                        <h3 data-i18n="about.vision">Vizyonumuz</h3>
+                        <p data-i18n="about.visionText">Tasarım gücü, sürdürülebilir üretim anlayışı ve global ağıyla otel kozmetiği alanında dünyada tercih edilen markalardan biri olmak.</p>
                     </div>
-                    <div class="value-card reveal">
-                        <div class="value-icon">
-                            <i class="fas fa-lightbulb"></i>
-                        </div>
-                        <h3 data-i18n="about.innovationTitle">İnovasyon</h3>
-                        <p data-i18n="about.innovationDescription">Sürekli araştırma ve geliştirme ile yenilikçi çözümler sunuyoruz.</p>
-                    </div>
-                    <div class="value-card reveal">
-                        <div class="value-icon">
-                            <i class="fas fa-leaf"></i>
-                        </div>
-                        <h3 data-i18n="about.sustainabilityTitle">Sürdürülebilirlik</h3>
-                        <p data-i18n="about.sustainabilityDescription">Çevre dostu üretim süreçleri ve sürdürülebilir kaynaklar kullanıyoruz.</p>
+                    <div class="info-card" data-anim="fade-up">
+                        <i class="fas fa-award card-icon"></i>
+                        <h3 data-i18n="about.quality">Kalite Politikamız</h3>
+                        <p data-i18n="about.qualityText">Tüm süreçlerimizi uluslararası standartlara uygun yönetmek, her partiyi test etmek ve sürekli iyileştirmeyi kurum kültürümüzün merkezinde tutmak.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="team-section container">
-            <div class="section-header reveal">
-                <div class="section-badge">
-                    <i class="fas fa-users"></i>
-                    <span data-i18n="about.teamBadge">Ekibimiz</span>
-                </div>
-                <h2 data-i18n="about.teamTitle">Uzman Kadromuz</h2>
-                <p data-i18n="about.teamDescription">Deneyimli ve uzman ekibimizle hizmetinizdeyiz</p>
-            </div>
-            <div class="team-grid">
-                <div class="team-member reveal">
-                    <div class="member-avatar">
-                        <i class="fas fa-user-tie"></i>
-                    </div>
-                    <h3>Ahmet Yılmaz</h3>
-                    <p class="member-title" data-i18n="about.generalManager">Genel Müdür</p>
-                    <p class="member-desc" data-i18n="about.managerDescription">15 yıllık sektör deneyimi ile şirketimizi yönetiyor.</p>
-                </div>
-                <div class="team-member reveal">
-                    <div class="member-avatar">
-                        <i class="fas fa-user-graduate"></i>
-                    </div>
-                    <h3>Dr. Ayşe Kaya</h3>
-                    <p class="member-title" data-i18n="about.rdDirector">Ar-Ge Direktörü</p>
-                    <p class="member-desc" data-i18n="about.rdDescription">Kimya doktorası ile yenilikçi ürünler geliştiriyor.</p>
-                </div>
-                <div class="team-member reveal">
-                    <div class="member-avatar">
-                        <i class="fas fa-user-cog"></i>
-                    </div>
-                    <h3>Mehmet Demir</h3>
-                    <p class="member-title" data-i18n="about.productionManager">Üretim Müdürü</p>
-                    <p class="member-desc" data-i18n="about.productionDescription">Kalite kontrol ve üretim süreçlerini yönetiyor.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="cta-section">
+        <section class="section">
             <div class="container">
-                <div class="cta-content reveal">
-                    <h2 data-i18n="general.customProductionNeeds">Bizimle Çalışmaya Hazır mısınız?</h2>
-                    <p data-i18n="general.customProductionDesc">Kaliteli kimyasal ham maddeler için hemen iletişime geçin.</p>
-                    <a href="/iletisim.html" class="btn btn-cta">
-                        <i class="fas fa-phone"></i>
-                        <span data-i18n="general.contactUs">İletişime Geçin</span>
-                    </a>
+                <div class="section-head center" data-anim="fade-up">
+                    <span class="eyebrow" data-i18n="about.timelineEyebrow">Yolculuğumuz</span>
+                    <h2 class="section-title" data-i18n="about.timelineTitle">Kilometre Taşları</h2>
                 </div>
+                <div class="timeline">
+                    <div class="tl-item" data-anim="fade-up">
+                        <div class="tl-year">2010</div>
+                        <h3 data-i18n="about.tl1.title">Kuruluş</h3>
+                        <p data-i18n="about.tl1.text">İstanbul'da kozmetik ham madde tedarikçisi olarak faaliyete başladık.</p>
+                    </div>
+                    <div class="tl-item" data-anim="fade-up">
+                        <div class="tl-year">2014</div>
+                        <h3 data-i18n="about.tl2.title">İlk Otel Koleksiyonu</h3>
+                        <p data-i18n="about.tl2.text">Otel kozmetiği alanındaki ilk şampuan, duş jeli ve sabun serimizi piyasaya sunduk.</p>
+                    </div>
+                    <div class="tl-item" data-anim="fade-up">
+                        <div class="tl-year">2017</div>
+                        <h3 data-i18n="about.tl3.title">Entegre Tesis</h3>
+                        <p data-i18n="about.tl3.text">Şişe üretimi, dolum ve baskı hatlarını tek çatı altında toplayan tesisimizi açtık.</p>
+                    </div>
+                    <div class="tl-item" data-anim="fade-up">
+                        <div class="tl-year">2021</div>
+                        <h3 data-i18n="about.tl4.title">Dispenser Sistemleri</h3>
+                        <p data-i18n="about.tl4.text">Kartuşlu ve doldurulabilir dispenser serilerimizle ürün gamımızı genişlettik.</p>
+                    </div>
+                    <div class="tl-item" data-anim="fade-up">
+                        <div class="tl-year">2025</div>
+                        <h3 data-i18n="about.tl5.title">Sürdürülebilir Dönüşüm</h3>
+                        <p data-i18n="about.tl5.text">Geri dönüştürülmüş plastik ambalajlara ve sıfır atık hedeflerine geçiş yaptık.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-band">
+            <div class="container">
+                <div>
+                    <h2 data-i18n="cta.title">Markanıza özel ürün setini birlikte tasarlayalım.</h2>
+                    <p data-i18n="cta.text">Numune, fiyat ve teslim süreleri için satış ekibimizle iletişime geçin.</p>
+                </div>
+                <button type="button" class="btn btn-color btn-plus" data-open-quote data-i18n="common.getQuote">Teklif Al</button>
             </div>
         </section>
     </main>
 
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <div class="footer-logo">
-                        <i class="fas fa-flask"></i>
-                        <span data-i18n="general.companyName">Okan'ın Kozmetiği</span>
-                    </div>
-                    <p data-i18n="general.companyDesc">Bilim ve güzelliği buluşturan yenilikçi çözümler.</p>
-                    <div class="social-links">
-                        <a href="#" class="social-link" aria-label="LinkedIn">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                        <a href="#" class="social-link" aria-label="Twitter">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="social-link" aria-label="Instagram">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h4 data-i18n="general.quickLinks">Hızlı Linkler</h4>
-                    <ul>
-                        <li><a href="/urunler/" data-i18n="menu.products">Ürünler</a></li>
-                        <li><a href="/hakkimizda.html" data-i18n="menu.about">Hakkımızda</a></li>
-                        <li><a href="/iletisim.html" data-i18n="menu.contact">İletişim</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4 data-i18n="general.contact">İletişim</h4>
-                    <div class="contact-info">
-                        <div class="contact-item">
-                            <i class="fas fa-phone"></i>
-                            <span>+90 212 552 00 39</span>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-envelope"></i>
-                            <span>info@okaninkozmetigi.com</span>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Halide Edip Adıvar Cd. No:21, Esenyurt/İstanbul</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 <span data-i18n="general.companyName">Okan'ın Kozmetiği</span> <span data-i18n="general.rights">Tüm hakları saklıdır.</span></p>
-            </div>
-        </div>
-    </footer>
-
-    <script src="/js/products.js"></script>
-    <script src="/js/script.js"></script>
-    <script src="/js/chatbot.js"></script>
+    <script src="/js/lang/en.js" defer></script>
+    <script src="/js/lang/ru.js" defer></script>
+    <script src="/js/lang.js" defer></script>
+    <script src="/js/products.js" defer></script>
+    <script src="/js/layout.js" defer></script>
+    <script src="/js/script.js" defer></script>
 </body>
-</html> 
+</html>

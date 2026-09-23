@@ -1,119 +1,37 @@
-# Okan's Cosmetics — Static Website
+# Samtida Cosmetics — Static Website
 
-Overview
---------
-Okan's Cosmetics is a static, frontend-only website that presents cosmetic products and company information. The project is built with plain HTML, CSS and JavaScript and includes:
-- Multi-language support via JS translation files and data-i18n attributes
-- A product catalog (data-driven)
-- Product page generation tooling (optional script)
-- A lightweight chatbot UI
-- Responsive layout and common accessibility attributes
+Samtida Cosmetics is a static (HTML/CSS/JS) website for hotel cosmetics and dispenser solutions. It needs no backend and can be deployed to any static host.
 
-This README documents the repository structure, how the parts work, how to run and develop locally, and recommended next steps.
+## Pages
 
-Key features
-------------
-- Static HTML/CSS/JS site (no backend required)
-- Language switching using translation files (e.g. `js/lang/en.js`, `js/lang/de.js`)
-- Product data stored in a JS module (e.g. `js/products.js`) used to render product lists/details
-- Product page generator script (e.g. `js/generate-product-pages.js`) to produce per-product HTML from a template
-- Chatbot UI implemented in JS/CSS (`js/chatbot.js`, `css/chatbot.css`)
-- Simple footer, navigation and product templates with data attributes for i18n
+| Page | File |
+| --- | --- |
+| Home (hero slider, dispenser series, parallax bands, about, product groups carousel, production standards) | `index.html` |
+| About us (story, mission/vision/quality, timeline) | `hakkimizda.html` |
+| Production (integrated production stages) | `uretim.html` |
+| Dispenser (models, technical specifications) | `dispenser.html` |
+| Brands (Pure Blanc, Ambre Noir, Lavanda series) | `markalar.html` |
+| Sustainability | `surdurulebilirlik.html` |
+| Contact (info cards, form, map) | `iletisim.html` |
+| Product catalog, filterable by category (`?kategori=`) | `urunler/index.html` |
+| Product detail (`?id=`) | `urunler/detay.html` |
 
-Repository layout (typical)
----------------------------
-- `index.html` — Main landing page (contains header, product links, footer with data-i18n attributes)
-- `urunler/` — Product pages (individual product HTML files, or generated)
-  - `product-template.html` — Template used by generator (if present)
-- `css/`
-  - `style.css` — Main site styles
-  - `chatbot.css` — Chatbot-specific styles
-- `js/`
-  - `script.js` — Main front-end logic (DOM wiring, event listeners)
-  - `products.js` — Product dataset (array of product objects)
-  - `lang/` — Translation modules (e.g. `en.js`, `de.js`)
-  - `lang.js` — i18n loader and `updateTexts` function to apply translations
-  - `chatbot.js` — Chatbot implementation
-  - `product-detail.js` — Logic to populate product detail pages from product data (optional)
-  - `generate-product-pages.js` — Node script to generate static product pages (optional)
-- `images/`, `videos/` — Media assets
-- `README.md` — This file
-- `.gitignore` — Ignored files (node_modules, .DS_Store, build artifacts)
+## Structure
 
-How the site works (high level)
-------------------------------
-- index and other HTML files include `data-i18n` attributes for text nodes that need translation.
-- On page load, a language module (e.g. `js/lang/en.js`) is loaded and `updateTexts()` replaces DOM text for elements with `data-i18n`.
-- Product list pages read `js/products.js` (an array of product objects) and render cards/links to product detail pages.
-- If present, `generate-product-pages.js` reads the product array and a template file to write static HTML pages into `urunler/`.
-- The chatbot is a frontend-only component that displays messages, collects user input, and optionally integrates simple scripted responses.
-- CSS files provide responsive layout and component styling.
+- `css/style.css` — design system (colors `--site-title-color: #ee6e01`, `--site-color: #656366`, cream `#f8f1e9`; Montserrat + Inter fonts), header, slider, parallax, cards, modal, footer, responsive rules
+- `js/layout.js` — shared header, footer, quote modal, search overlay and WhatsApp button, injected into every page. **Contact details (phone, email, address, WhatsApp, social links) are edited in the `CONFIG` object at the top of this file.**
+- `js/products.js` — product groups, series and product data (TR/EN/RU text)
+- `js/script.js` — sticky header, mobile menu, Swiper sliders, modal/form validation, search, catalog and detail rendering, scroll animations
+- `js/lang.js` + `js/lang/en.js`, `js/lang/ru.js` — multilingual support. Turkish text lives in the HTML; EN/RU translations are applied through `data-i18n` keys.
+- `images/samtida/` — images (Unsplash-licensed placeholder photos; replace them with real product photos)
 
-Local development & running
----------------------------
-Requirements:
-- macOS (you're on Mac)
-- Node.js (optional, for the generator and `http-server`)
-- Python (optional, for `python -m http.server`) or npm `http-server`
+Forms have no backend: after validation they open the user's email app with a pre-filled message (`info@` for the information form, `siparis@` for the price form).
 
-Run a local static server from project root:
-- Using Python:
-  ```
-  python3 -m http.server 8000
-  ```
-  Then open http://localhost:8000/
+## Running locally
 
-- Using npm (if Node.js installed):
-  ```
-  npx http-server -p 8000
-  ```
+Pages use root-relative paths (`/css/...`), so they must be served from a server:
 
-Typical dev workflow:
-1. Edit files in VS Code.
-2. Check JS console for runtime errors (Developer Tools -> Console).
-3. Use the network tab to ensure assets load (CSS, JS, images).
-4. If product pages are generated:
-   ```
-   node js/generate-product-pages.js
-   ```
-   Inspect `urunler/` for generated HTML files.
-
-Git / repository operations
----------------------------
-- Initialize git (if needed):
-  ```
-  git init
-  git add -A
-  git commit -m "Initial commit"
-  git branch -M main
-  ```
-
-- Add a remote and push:
-  ```
-  git remote add origin https://github.com/okanars/OkansCosmetics-New.git
-  git push -u origin main
-  ```
-
-- If push rejects because the remote is ahead:
-  - Preferred: merge or rebase
-    ```
-    git fetch origin
-    git pull --rebase origin main
-    git push origin main
-    ```
-  - Force push only if you intend to overwrite remote history:
-    ```
-    git push --force-with-lease origin main
-    ```
-
-Troubleshooting
----------------
-- Missing translations: ensure `js/lang/<code>.js` exists and keys match `data-i18n` attributes.
-- Images 404: check relative paths under `/images/` or usage of absolute paths.
-- Non-fast-forward push error: fetch & rebase/merge before pushing (see above).
-- Generator script errors: run `node js/generate-product-pages.js` and read stack trace; ensure template path and product data exist.
-
-
-
-
-
+```bash
+python3 -m http.server 8000
+# http://localhost:8000
+```

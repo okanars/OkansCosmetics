@@ -1,872 +1,432 @@
-// Modern JavaScript with advanced animations and interactions
-class ModernWebsite {
-    constructor() {
-        this.init();
+// Samtida Cosmetics — sayfa etkileşimleri
+(function () {
+    const I18N = window.SamtidaI18n;
+    const t = I18N.t;
+    const pick = I18N.pick;
+    const CONFIG = window.SAMTIDA_CONFIG;
+    const CATEGORIES = window.SAMTIDA_CATEGORIES || [];
+    const PRODUCTS = window.SAMTIDA_PRODUCTS || [];
+    const SERIES = window.SAMTIDA_SERIES || {};
+
+    const $ = (sel, root = document) => root.querySelector(sel);
+    const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+
+    const categoryBySlug = slug => CATEGORIES.find(c => c.slug === slug);
+    const productUrl = p => `/urunler/detay.html?id=${encodeURIComponent(p.id)}`;
+    const categoryUrl = slug => `/urunler/index.html?kategori=${slug}`;
+
+    document.documentElement.classList.remove('no-js');
+
+    /* ------------------------------------------------------------------
+       Header: şeffaftan beyaza geçiş
+       ------------------------------------------------------------------ */
+    const header = $('#siteHeader');
+    const toTop = $('.to-top');
+    function onScroll() {
+        const y = window.scrollY;
+        header.classList.toggle('fixed', y > 60);
+        toTop.classList.toggle('show', y > 600);
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    /* ------------------------------------------------------------------
+       Mobil menü
+       ------------------------------------------------------------------ */
+    const menuToggle = $('.menu-toggle');
+    function setNav(open) {
+        document.body.classList.toggle('nav-open', open);
+        document.body.classList.toggle('no-scroll', open);
+        menuToggle.setAttribute('aria-expanded', String(open));
+    }
+    menuToggle.addEventListener('click', () => setNav(!document.body.classList.contains('nav-open')));
+    $$('[data-nav-close]').forEach(el => el.addEventListener('click', () => setNav(false)));
+    $$('.sub-toggle').forEach(btn => btn.addEventListener('click', () => btn.parentElement.classList.toggle('sub-open')));
+    window.addEventListener('resize', () => { if (window.innerWidth > 1100) setNav(false); });
+
+    /* ------------------------------------------------------------------
+       Dil seçici
+       ------------------------------------------------------------------ */
+    $$('.lang-switch button').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === I18N.lang);
+        btn.addEventListener('click', () => I18N.set(btn.dataset.lang));
+    });
+
+    /* ------------------------------------------------------------------
+       Teklif modalı
+       ------------------------------------------------------------------ */
+    const quoteModal = $('#quoteModal');
+    let lastFocus = null;
+
+    function openLayer(layer) {
+        lastFocus = document.activeElement;
+        layer.classList.add('open');
+        layer.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('no-scroll');
+    }
+    function closeLayer(layer) {
+        layer.classList.remove('open');
+        layer.setAttribute('aria-hidden', 'true');
+        if (!document.body.classList.contains('nav-open')) document.body.classList.remove('no-scroll');
+        if (lastFocus) lastFocus.focus();
     }
 
-    init() {
-        this.setupEventListeners();
-        this.initializeAnimations();
-        this.setupScrollEffects();
-        this.setupNavigation();
-        this.setupLoadingStates();
-        this.setupMicroInteractions();
-        this.initializeProductFilters();
-    }
-
-    setupEventListeners() {
-        // Smooth scrolling for all internal links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', (e) => {
-                e.preventDefault();
-                const target = document.querySelector(anchor.getAttribute('href'));
-                if (target) {
-                    this.smoothScrollTo(target, 1000);
-                }
-            });
-        });
-
-        // Form submissions with loading states
-        document.querySelectorAll('form').forEach(form => {
-            form.addEventListener('submit', (e) => this.handleFormSubmit(e));
-        });
-
-        // Button interactions
-        document.querySelectorAll('.btn').forEach(btn => {
-            btn.addEventListener('click', (e) => this.handleButtonClick(e));
-            btn.addEventListener('mouseenter', (e) => this.handleButtonHover(e, 'enter'));
-            btn.addEventListener('mouseleave', (e) => this.handleButtonHover(e, 'leave'));
-        });
-
-        // Navigation link interactions
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('mouseenter', (e) => this.handleNavHover(e, 'enter'));
-            link.addEventListener('mouseleave', (e) => this.handleNavHover(e, 'leave'));
-        });
-
-        // Highlight card interactions
-        document.querySelectorAll('.highlight-card').forEach(card => {
-            card.addEventListener('mouseenter', (e) => this.handleHighlightHover(e, 'enter'));
-            card.addEventListener('mouseleave', (e) => this.handleHighlightHover(e, 'leave'));
-        });
-
-        // Social link interactions
-        document.querySelectorAll('.social-link').forEach(link => {
-            link.addEventListener('mouseenter', (e) => this.handleSocialHover(e, 'enter'));
-            link.addEventListener('mouseleave', (e) => this.handleSocialHover(e, 'leave'));
-        });
-
-        // FAQ interactions
-        document.querySelectorAll('.faq-question').forEach(question => {
-            question.addEventListener('click', (e) => this.handleFAQClick(e));
-        });
-
-        // Contact method interactions
-        document.querySelectorAll('.contact-method').forEach(method => {
-            method.addEventListener('mouseenter', (e) => this.handleContactMethodHover(e, 'enter'));
-            method.addEventListener('mouseleave', (e) => this.handleContactMethodHover(e, 'leave'));
-        });
-
-        // Social button interactions
-        document.querySelectorAll('.social-btn').forEach(btn => {
-            btn.addEventListener('mouseenter', (e) => this.handleSocialButtonHover(e, 'enter'));
-            btn.addEventListener('mouseleave', (e) => this.handleSocialButtonHover(e, 'leave'));
-        });
-    }
-
-    initializeAnimations() {
-        // Initialize AOS-like scroll animations
-        this.setupScrollReveal();
-        
-        // Hero section animations
-        this.animateHeroSection();
-        
-        // Floating shapes animation
-        this.animateFloatingShapes();
-        
-        // Stats counter animation
-        this.animateStats();
-        
-        // Parallax effects
-        this.setupParallax();
-    }
-
-    setupScrollEffects() {
-        // Header scroll effect
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-
-        // Smooth scroll behavior
-        window.addEventListener('scroll', () => {
-            this.handleScrollAnimations();
-        });
-    }
-
-    setupNavigation() {
-        const menuToggle = document.querySelector('.menu-toggle');
-        const navLinks = document.querySelector('.nav-links');
-
-        if (menuToggle && navLinks) {
-            menuToggle.addEventListener('click', () => {
-                navLinks.classList.toggle('active');
-                menuToggle.classList.toggle('active');
-                
-                // Animate menu toggle
-                const spans = menuToggle.querySelectorAll('span');
-                spans.forEach((span, index) => {
-                    span.style.transform = navLinks.classList.contains('active') 
-                        ? `rotate(${45 * (index === 1 ? 0 : 1)}) translateY(${index === 1 ? -8 : 8}px)`
-                        : 'none';
-                });
-            });
-
-            // Close menu when clicking outside
-            document.addEventListener('click', (e) => {
-                if (!menuToggle.contains(e.target) && !navLinks.contains(e.target)) {
-                    navLinks.classList.remove('active');
-                    menuToggle.classList.remove('active');
-                }
-            });
+    function openQuote(productName) {
+        setNav(false);
+        const form = $('.samtida-form', quoteModal);
+        const success = $('.form-success', quoteModal);
+        form.hidden = false;
+        success.hidden = true;
+        if (productName) {
+            setFormType(form, 'price');
+            form.elements.message.value = t('form.productPrefill', '{product} ürünü için fiyat teklifi almak istiyorum.').replace('{product}', productName);
         }
+        openLayer(quoteModal);
+        setTimeout(() => form.elements.name.focus(), 250);
     }
 
-    setupLoadingStates() {
-        // Page loading animation
-        window.addEventListener('load', () => {
-            document.body.classList.add('loaded');
-            this.animatePageLoad();
-        });
-
-        // Image loading states
-        document.querySelectorAll('img').forEach(img => {
-            img.addEventListener('load', () => {
-                img.classList.add('loaded');
-            });
-            
-            img.addEventListener('error', () => {
-                // Create a placeholder using CSS instead of loading a file
-                img.style.display = 'none';
-                const placeholder = document.createElement('div');
-                placeholder.className = 'image-placeholder';
-                placeholder.innerHTML = `
-                    <i class="fas fa-flask"></i>
-                    <span>${img.alt || 'Ürün Görseli'}</span>
-                `;
-                img.parentNode.insertBefore(placeholder, img);
-            });
-        });
-    }
-
-    setupMicroInteractions() {
-        // Cursor effects
-        this.setupCursorEffects();
-        
-        // Text typing effect
-        this.setupTypingEffect();
-        
-        // Particle effects
-        this.setupParticleEffects();
-        
-        // Magnetic effects
-        this.setupMagneticEffects();
-    }
-
-    // Animation Methods
-    animateHeroSection() {
-        const heroElements = document.querySelectorAll('.hero-content > *');
-        heroElements.forEach((element, index) => {
-            element.style.animationDelay = `${index * 0.2}s`;
-            element.classList.add('animate-fade-in-up');
-        });
-    }
-
-    animateFloatingShapes() {
-        const shapes = document.querySelectorAll('.shape');
-        shapes.forEach((shape, index) => {
-            shape.style.animationDelay = `${index * 1.5}s`;
-            shape.style.animationDuration = `${6 + index}s`;
-        });
-    }
-
-    animateStats() {
-        const stats = document.querySelectorAll('.stat-number');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    this.animateCounter(entry.target);
-                }
-            });
-        });
-
-        stats.forEach(stat => observer.observe(stat));
-    }
-
-    animateCounter(element) {
-        const target = parseInt(element.textContent.replace(/\D/g, ''));
-        const duration = 2000;
-        const step = target / (duration / 16);
-        let current = 0;
-
-        const timer = setInterval(() => {
-            current += step;
-            if (current >= target) {
-                current = target;
-                clearInterval(timer);
-            }
-            element.textContent = Math.floor(current) + '+';
-        }, 16);
-    }
-
-    setupScrollReveal() {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                    
-                    // Add staggered animation for child elements
-                    const children = entry.target.querySelectorAll('.animate-stagger');
-                    children.forEach((child, index) => {
-                        child.style.animationDelay = `${index * 0.1}s`;
-                        child.classList.add('animate-fade-in-up');
-                    });
-                }
-            });
-        }, {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        });
-
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-    }
-
-    setupParallax() {
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const parallaxElements = document.querySelectorAll('.parallax');
-            
-            parallaxElements.forEach(element => {
-                const speed = element.dataset.speed || 0.5;
-                element.style.transform = `translateY(${scrolled * speed}px)`;
-            });
-        });
-    }
-
-    // Interaction Methods
-    handleButtonHover(event, type) {
-        const button = event.currentTarget;
-        const bg = button.querySelector('.btn-bg');
-        
-        if (type === 'enter') {
-            button.style.transform = 'translateY(-3px)';
-            button.style.boxShadow = '0 15px 35px rgba(0,0,0,0.15)';
-        } else {
-            button.style.transform = 'translateY(0)';
-            button.style.boxShadow = '0 8px 25px rgba(0,0,0,0.12)';
+    document.addEventListener('click', e => {
+        const trigger = e.target.closest('[data-open-quote]');
+        if (trigger) {
+            e.preventDefault();
+            openQuote(trigger.dataset.product);
         }
+    });
+    $$('[data-close]', quoteModal).forEach(el => el.addEventListener('click', () => closeLayer(quoteModal)));
+
+    /* ------------------------------------------------------------------
+       İletişim sayfası: kartlar ve form ortak şablondan doldurulur
+       ------------------------------------------------------------------ */
+    const contactForm = $('#contactForm');
+    if (contactForm) {
+        contactForm.innerHTML = `
+            <div class="form-type" role="tablist">
+                <button type="button" class="active" data-type="info" data-i18n="form.infoForm">Bilgi Formu</button>
+                <button type="button" data-type="price" data-i18n="form.priceForm">Fiyat Formu</button>
+            </div>` + window.SAMTIDA_FORM_FIELDS('contact');
+    }
+    const contactCards = $('#contactCards');
+    if (contactCards) {
+        const c = CONFIG;
+        contactCards.innerHTML = `
+            <div class="contact-card"><i class="fas fa-map-marker-alt"></i><div><h3 data-i18n="footer.hq">Merkez Ofis & Fabrika</h3><p>${c.address}</p></div></div>
+            <div class="contact-card"><i class="fas fa-phone"></i><div><h3 data-i18n="footer.phone">Telefon</h3><a href="tel:${c.phoneHref}">${c.phone}</a></div></div>
+            <div class="contact-card"><i class="fas fa-envelope"></i><div><h3 data-i18n="footer.email">E-posta</h3><a href="mailto:${c.email}">${c.email}</a></div></div>
+            <div class="contact-card"><i class="fas fa-shopping-bag"></i><div><h3 data-i18n="footer.orders">Sipariş</h3><a href="mailto:${c.orderEmail}">${c.orderEmail}</a></div></div>
+            <div class="contact-card"><i class="fab fa-whatsapp"></i><div><h3>WhatsApp</h3><a href="https://wa.me/${c.whatsapp}" target="_blank" rel="noopener">${c.phone}</a></div></div>`;
     }
 
-    handleNavHover(event, type) {
-        const link = event.currentTarget;
-        const icon = link.querySelector('i');
-        
-        if (type === 'enter') {
-            link.style.transform = 'translateY(-2px)';
-            if (icon) {
-                icon.style.transform = 'scale(1.2) rotate(5deg)';
-            }
-        } else {
-            link.style.transform = 'translateY(0)';
-            if (icon) {
-                icon.style.transform = 'scale(1) rotate(0deg)';
-            }
-        }
+    /* ------------------------------------------------------------------
+       Formlar (modal + iletişim sayfası)
+       ------------------------------------------------------------------ */
+    function setFormType(form, type) {
+        form.dataset.formType = type;
+        $$('.form-type button', form).forEach(b => b.classList.toggle('active', b.dataset.type === type));
     }
 
-    handleHighlightHover(event, type) {
-        const card = event.currentTarget;
-        const icon = card.querySelector('.highlight-icon');
-        const link = card.querySelector('.highlight-link a');
-        
-        if (type === 'enter') {
-            card.style.transform = 'translateY(-15px)';
-            card.style.boxShadow = '0 20px 40px rgba(0,0,0,0.15)';
-            
-            if (icon) {
-                icon.style.transform = 'scale(1.1) rotate(5deg)';
-            }
-            
-            if (link) {
-                link.style.transform = 'translateX(8px)';
-            }
-        } else {
-            card.style.transform = 'translateY(0)';
-            card.style.boxShadow = '0 2px 10px rgba(0,0,0,0.08)';
-            
-            if (icon) {
-                icon.style.transform = 'scale(1) rotate(0deg)';
-            }
-            
-            if (link) {
-                link.style.transform = 'translateX(0)';
-            }
-        }
-    }
-
-    handleSocialHover(event, type) {
-        const link = event.currentTarget;
-        const icon = link.querySelector('i');
-        
-        if (type === 'enter') {
-            link.style.transform = 'translateY(-3px) scale(1.1)';
-            link.style.background = 'var(--accent-color)';
-            link.style.color = 'var(--primary-color)';
-            
-            if (icon) {
-                icon.style.transform = 'rotate(360deg)';
-            }
-        } else {
-            link.style.transform = 'translateY(0) scale(1)';
-            link.style.background = 'rgba(255, 255, 255, 0.1)';
-            link.style.color = 'var(--white-color)';
-            
-            if (icon) {
-                icon.style.transform = 'rotate(0deg)';
-            }
-        }
-    }
-
-    handleButtonClick(event) {
-        const button = event.currentTarget;
-        
-        // Create ripple effect
-        const ripple = document.createElement('span');
-        const rect = button.getBoundingClientRect();
-        const size = Math.max(rect.width, rect.height);
-        const x = event.clientX - rect.left - size / 2;
-        const y = event.clientY - rect.top - size / 2;
-        
-        ripple.style.width = ripple.style.height = size + 'px';
-        ripple.style.left = x + 'px';
-        ripple.style.top = y + 'px';
-        ripple.classList.add('ripple');
-        
-        button.appendChild(ripple);
-        
-        setTimeout(() => {
-            ripple.remove();
-        }, 600);
-    }
-
-    handleFAQClick(event) {
-        const question = event.currentTarget;
-        const faqItem = question.closest('.faq-item');
-        const answer = faqItem.querySelector('.faq-answer');
-        const icon = question.querySelector('i');
-        
-        // Close other FAQ items
-        document.querySelectorAll('.faq-item').forEach(item => {
-            if (item !== faqItem) {
-                item.classList.remove('active');
-            }
-        });
-        
-        // Toggle current FAQ item
-        faqItem.classList.toggle('active');
-        
-        // Animate icon rotation
-        if (faqItem.classList.contains('active')) {
-            icon.style.transform = 'rotate(180deg)';
-        } else {
-            icon.style.transform = 'rotate(0deg)';
-        }
-    }
-
-    handleContactMethodHover(event, type) {
-        const method = event.currentTarget;
-        const icon = method.querySelector('.method-icon');
-        const content = method.querySelector('.method-content');
-        
-        if (type === 'enter') {
-            method.style.transform = 'translateY(-5px)';
-            method.style.boxShadow = '0 15px 35px rgba(0,0,0,0.15)';
-            
-            if (icon) {
-                icon.style.transform = 'scale(1.1) rotate(5deg)';
-            }
-            
-            if (content) {
-                content.style.transform = 'translateY(-2px)';
-            }
-        } else {
-            method.style.transform = 'translateY(0)';
-            method.style.boxShadow = '0 2px 10px rgba(0,0,0,0.08)';
-            
-            if (icon) {
-                icon.style.transform = 'scale(1) rotate(0deg)';
-            }
-            
-            if (content) {
-                content.style.transform = 'translateY(0)';
-            }
-        }
-    }
-
-    handleSocialButtonHover(event, type) {
-        const button = event.currentTarget;
-        const icon = button.querySelector('i');
-        
-        if (type === 'enter') {
-            button.style.transform = 'translateY(-3px) scale(1.05)';
-            button.style.boxShadow = '0 10px 25px rgba(0,0,0,0.2)';
-            
-            if (icon) {
-                icon.style.transform = 'scale(1.2)';
-            }
-        } else {
-            button.style.transform = 'translateY(0) scale(1)';
-            button.style.boxShadow = 'none';
-            
-            if (icon) {
-                icon.style.transform = 'scale(1)';
-            }
-        }
-    }
-
-    // Utility Methods
-    smoothScrollTo(target, duration) {
-        const targetPosition = target.offsetTop;
-        const startPosition = window.pageYOffset;
-        const distance = targetPosition - startPosition;
-        let startTime = null;
-
-        function animation(currentTime) {
-            if (startTime === null) startTime = currentTime;
-            const timeElapsed = currentTime - startTime;
-            const run = this.ease(timeElapsed, startPosition, distance, duration);
-            window.scrollTo(0, run);
-            if (timeElapsed < duration) requestAnimationFrame(animation);
-        }
-
-        this.ease = (t, b, c, d) => {
-            t /= d / 2;
-            if (t < 1) return c / 2 * t * t + b;
-            t--;
-            return -c / 2 * (t * (t - 2) - 1) + b;
+    function validate(form) {
+        let ok = true;
+        const check = (name, valid) => {
+            const field = form.elements[name].closest('.field');
+            field.classList.toggle('invalid', !valid);
+            if (!valid) ok = false;
         };
-
-        requestAnimationFrame(animation);
+        const val = name => form.elements[name].value.trim();
+        check('name', val('name').length > 1);
+        check('surname', val('surname').length > 1);
+        check('email', /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(val('email')));
+        check('phone', val('phone').replace(/\D/g, '').length >= 10);
+        check('message', val('message').length > 2);
+        const consent = form.elements.consent;
+        consent.closest('.consent').classList.toggle('invalid', !consent.checked);
+        if (!consent.checked) ok = false;
+        return ok;
     }
 
-    handleFormSubmit(event) {
-        event.preventDefault();
-        const form = event.target;
-        const submitBtn = form.querySelector('button[type="submit"]');
-        const originalText = submitBtn.textContent;
-        
-        // Show loading state
-        submitBtn.innerHTML = '<span class="loading-spinner"></span> Gönderiliyor...';
-        submitBtn.disabled = true;
-        
-        // Simulate form submission
-        setTimeout(() => {
-            submitBtn.innerHTML = '<i class="fas fa-check"></i> Gönderildi!';
-            submitBtn.style.background = 'var(--accent-color)';
-            
-            setTimeout(() => {
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-                submitBtn.style.background = '';
-                form.reset();
-            }, 2000);
-        }, 2000);
-    }
-
-    handleScrollAnimations() {
-        const scrolled = window.pageYOffset;
-        const parallaxElements = document.querySelectorAll('[data-parallax]');
-        
-        parallaxElements.forEach(element => {
-            const speed = element.dataset.parallax || 0.5;
-            element.style.transform = `translateY(${scrolled * speed}px)`;
+    $$('.samtida-form').forEach(form => {
+        $$('.form-type button', form).forEach(btn => btn.addEventListener('click', () => setFormType(form, btn.dataset.type)));
+        form.addEventListener('input', e => {
+            const field = e.target.closest('.field');
+            if (field) field.classList.remove('invalid');
         });
-    }
-
-    animatePageLoad() {
-        document.body.style.opacity = '0';
-        document.body.style.transform = 'translateY(20px)';
-        
-        setTimeout(() => {
-            document.body.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
-            document.body.style.opacity = '1';
-            document.body.style.transform = 'translateY(0)';
-        }, 100);
-    }
-
-    // Advanced Effects
-    setupCursorEffects() {
-        const cursor = document.createElement('div');
-        cursor.className = 'custom-cursor';
-        document.body.appendChild(cursor);
-
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + window.scrollY + 'px';
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            if (!validate(form)) {
+                const firstInvalid = $('.invalid input, .invalid textarea, .consent.invalid input', form);
+                if (firstInvalid) firstInvalid.focus();
+                return;
+            }
+            const isPrice = form.dataset.formType === 'price';
+            const f = form.elements;
+            const subject = `[Samtida] ${isPrice ? 'Fiyat Formu' : 'Bilgi Formu'} - ${f.company.value.trim() || f.name.value.trim() + ' ' + f.surname.value.trim()}`;
+            const body = [
+                `Ad Soyad: ${f.name.value.trim()} ${f.surname.value.trim()}`,
+                `E-posta: ${f.email.value.trim()}`,
+                `Telefon: ${f.phone.value.trim()}`,
+                `Firma: ${f.company.value.trim() || '-'}`,
+                '',
+                f.message.value.trim()
+            ].join('\n');
+            window.location.href = `mailto:${isPrice ? CONFIG.orderEmail : CONFIG.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            form.reset();
+            form.hidden = true;
+            const success = form.parentElement.querySelector('.form-success');
+            if (success) success.hidden = false;
         });
+    });
 
-        // Cursor effects for interactive elements
-        document.querySelectorAll('a, button, .product-card, .highlight-card').forEach(el => {
-            el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-            el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-        });
+    /* ------------------------------------------------------------------
+       Arama
+       ------------------------------------------------------------------ */
+    const searchOverlay = $('#searchOverlay');
+    const searchInput = $('#searchInput');
+    const searchResults = $('#searchResults');
+    const normalize = s => s.toLocaleLowerCase('tr').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/ı/g, 'i');
+
+    function renderSearch() {
+        const q = normalize(searchInput.value.trim());
+        if (q.length < 2) { searchResults.innerHTML = ''; return; }
+        const hits = PRODUCTS.filter(p => {
+            const cat = categoryBySlug(p.category);
+            const hay = [p.name.tr, pick(p.name), cat.name.tr, pick(cat.name), SERIES[p.series].tr].join(' ');
+            return normalize(hay).includes(q);
+        }).slice(0, 8);
+        searchResults.innerHTML = hits.length
+            ? hits.map(p => `
+                <a class="search-result" href="${productUrl(p)}">
+                    <img src="${p.image}" alt="" loading="lazy">
+                    <div><strong>${pick(p.name)}</strong><span>${pick(categoryBySlug(p.category).name)} · ${p.size}</span></div>
+                </a>`).join('')
+            : `<p>${t('search.empty', 'Aramanızla eşleşen ürün bulunamadı.')}</p>`;
     }
+    searchInput.addEventListener('input', renderSearch);
+    $$('[data-open-search]').forEach(btn => btn.addEventListener('click', () => {
+        openLayer(searchOverlay);
+        setTimeout(() => searchInput.focus(), 200);
+    }));
+    $$('[data-close]', searchOverlay).forEach(el => el.addEventListener('click', () => closeLayer(searchOverlay)));
 
-    setupTypingEffect() {
-        const typingElements = document.querySelectorAll('[data-typing]');
-        
-        typingElements.forEach(element => {
-            const text = element.textContent;
-            element.textContent = '';
-            element.style.borderRight = '2px solid var(--accent-color)';
-            
-            let i = 0;
-            const typeWriter = () => {
-                if (i < text.length) {
-                    element.textContent += text.charAt(i);
-                    i++;
-                    setTimeout(typeWriter, 100);
-                } else {
-                    element.style.borderRight = 'none';
-                }
-            };
-            
-            // Start typing when element is visible
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        typeWriter();
-                        observer.unobserve(entry.target);
-                    }
-                });
-            });
-            
-            observer.observe(element);
-        });
-    }
+    document.addEventListener('keydown', e => {
+        if (e.key !== 'Escape') return;
+        if (quoteModal.classList.contains('open')) closeLayer(quoteModal);
+        else if (searchOverlay.classList.contains('open')) closeLayer(searchOverlay);
+        else if (document.body.classList.contains('nav-open')) setNav(false);
+    });
 
-    setupParticleEffects() {
-        // Create particle container
-        const particleContainer = document.createElement('div');
-        particleContainer.className = 'particle-container';
-        document.body.appendChild(particleContainer);
-
-        // Generate particles
-        for (let i = 0; i < 50; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.animationDelay = Math.random() * 20 + 's';
-            particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
-            particleContainer.appendChild(particle);
-        }
-    }
-
-    setupMagneticEffects() {
-        document.querySelectorAll('.magnetic').forEach(element => {
-            element.addEventListener('mousemove', (e) => {
-                const rect = element.getBoundingClientRect();
-                const x = e.clientX - rect.left - rect.width / 2;
-                const y = e.clientY - rect.top - rect.height / 2;
-                
-                element.style.transform = `translate(${x * 0.1}px, ${y * 0.1}px)`;
-            });
-            
-            element.addEventListener('mouseleave', () => {
-                element.style.transform = 'translate(0, 0)';
-            });
-        });
-    }
-
-    // Product filtering and search functionality
-    initializeProductFilters() {
-        const categoryFilter = document.getElementById('category-filter');
-        const originFilter = document.getElementById('origin-filter');
-        const searchInput = document.getElementById('search-input');
-        
-        if (categoryFilter) {
-            categoryFilter.addEventListener('change', this.filterProducts.bind(this));
-        }
-        
-        if (originFilter) {
-            originFilter.addEventListener('change', this.filterProducts.bind(this));
-        }
-        
-        if (searchInput) {
-            searchInput.addEventListener('input', this.filterProducts.bind(this));
-        }
-    }
-
-    filterProducts() {
-        const categoryFilter = document.getElementById('category-filter');
-        const originFilter = document.getElementById('origin-filter');
-        const searchInput = document.getElementById('search-input');
-        const productCards = document.querySelectorAll('.product-card');
-        
-        const selectedCategory = categoryFilter ? categoryFilter.value : '';
-        const selectedOrigin = originFilter ? originFilter.value : '';
-        const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
-        
-        productCards.forEach(card => {
-            const productName = card.querySelector('h3').textContent.toLowerCase();
-            const productDesc = card.querySelector('p').textContent.toLowerCase();
-            const productCategory = card.dataset.category || '';
-            const productOrigin = card.dataset.origin || '';
-            
-            let showCard = true;
-            
-            // Category filter
-            if (selectedCategory && productCategory !== selectedCategory) {
-                showCard = false;
-            }
-            
-            // Origin filter - case insensitive comparison
-            if (selectedOrigin && productOrigin.toLowerCase() !== selectedOrigin.toLowerCase()) {
-                showCard = false;
-            }
-            
-            // Search filter
-            if (searchTerm && !productName.includes(searchTerm) && !productDesc.includes(searchTerm)) {
-                showCard = false;
-            }
-            
-            // Show/hide card with animation
-            if (showCard) {
-                card.style.display = 'block';
-                setTimeout(() => {
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
-                }, 10);
-            } else {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(20px)';
-                setTimeout(() => {
-                    card.style.display = 'none';
-                }, 300);
-            }
-        });
-        
-        // Show "no results" message if no products match
-        const visibleCards = document.querySelectorAll('.product-card[style*="display: block"], .product-card:not([style*="display: none"])');
-        let noResultsMsg = document.getElementById('no-results-message');
-        
-        if (visibleCards.length === 0) {
-            if (!noResultsMsg) {
-                noResultsMsg = document.createElement('div');
-                noResultsMsg.id = 'no-results-message';
-                noResultsMsg.className = 'no-results';
-                noResultsMsg.innerHTML = `
-                    <div class="no-results-content">
-                        <i class="fas fa-search"></i>
-                        <h3>Aradığınız kriterlere uygun ürün bulunamadı</h3>
-                        <p>Farklı filtreler deneyebilir veya arama teriminizi değiştirebilirsiniz.</p>
-                        <button onclick="window.clearFilters()" class="btn btn-secondary">
-                            <i class="fas fa-times"></i>
-                            <span>Filtreleri Temizle</span>
-                        </button>
-                    </div>
-                `;
-                document.getElementById('product-list-grid').appendChild(noResultsMsg);
-            }
-            noResultsMsg.style.display = 'block';
-        } else {
-            if (noResultsMsg) {
-                noResultsMsg.style.display = 'none';
-            }
-        }
-    }
-
-    // Enhanced product card creation with data attributes
-    createProductCard(product) {
-        const card = document.createElement('div');
-        card.className = 'product-card reveal';
-        card.dataset.category = product.category || '';
-        card.dataset.origin = product.origin || '';
-        
-        card.innerHTML = `
-            <div class="product-image">
-                <img src="${product.image}" alt="${product.name}" loading="lazy">
-            </div>
-            <div class="product-card-content">
-                <h3>${product.name}</h3>
-                <p>${product.description}</p>
-                <div class="product-meta">
-                    <span>${product.category}</span>
-                    <span>${product.origin}</span>
+    /* ------------------------------------------------------------------
+       Kart şablonları
+       ------------------------------------------------------------------ */
+    function productCard(p) {
+        const cat = categoryBySlug(p.category);
+        const name = pick(p.name);
+        return `
+        <article class="product-card">
+            <div class="product-card-img">
+                <a href="${productUrl(p)}" tabindex="-1"><img src="${p.image}" alt="${name}" loading="lazy"></a>
+                <span class="tag">${pick(SERIES[p.series])}</span>
+                <div class="product-card-actions">
+                    <a href="${productUrl(p)}">${t('common.details', 'İncele')}</a>
+                    <button type="button" data-open-quote data-product="${name}">${t('common.requestQuote', 'Teklif İste')}</button>
                 </div>
-                <a href="/urunler/${product.slug}.html" class="product-link">
-                    <span>Detayları Gör</span>
-                    <i class="fas fa-arrow-right"></i>
-                </a>
             </div>
-        `;
-        
-        return card;
+            <div class="product-card-body">
+                <span class="cat">${pick(cat.name)}</span>
+                <h3><a href="${productUrl(p)}">${name}</a></h3>
+                <span class="size">${p.size}</span>
+            </div>
+        </article>`;
     }
-}
 
-// Initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    new ModernWebsite();
+    // Anasayfa: ürün grupları carousel
+    $$('[data-render="groups"]').forEach(wrap => {
+        wrap.innerHTML = CATEGORIES.map((c, i) => `
+            <a class="swiper-slide group-card" href="${categoryUrl(c.slug)}">
+                <div class="group-card-img">
+                    <img src="${c.image}" alt="${pick(c.name)}" loading="lazy">
+                    <span class="num">0${i + 1}</span>
+                </div>
+                <div class="group-card-body">
+                    <h3>${pick(c.name)}</h3>
+                    <p>${pick(c.desc)}</p>
+                    <span class="link-more">${t('common.explore', 'İncele')} <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>`).join('');
+    });
 
-    // Initialize Swiper
-    if (document.querySelector('.hero-slider')) {
-        const swiper = new Swiper('.swiper', {
-            // Optional parameters
-            loop: true,
-            effect: 'fade',
-            fadeEffect: {
-                crossFade: true
-            },
-            autoplay: {
-                delay: 5000,
-                disableOnInteraction: false,
-            },
+    // Markalar: seriye ait ürünler
+    $$('[data-series-products]').forEach(wrap => {
+        const list = PRODUCTS.filter(p => p.series === wrap.dataset.seriesProducts).slice(0, 4);
+        wrap.innerHTML = list.map(productCard).join('');
+    });
 
-            // If we need pagination
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
+    /* ------------------------------------------------------------------
+       Ürün kataloğu
+       ------------------------------------------------------------------ */
+    const catalog = $('[data-catalog]');
+    if (catalog) {
+        const filterBar = $('.filter-bar', catalog);
+        const grid = $('.product-grid', catalog);
+        const params = new URLSearchParams(window.location.search);
+        let active = categoryBySlug(params.get('kategori')) ? params.get('kategori') : 'all';
 
-            // Navigation arrows
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
+        const filters = [{ slug: 'all', label: t('catalog.all', 'Tümü'), count: PRODUCTS.length }]
+            .concat(CATEGORIES.map(c => ({ slug: c.slug, label: pick(c.name), count: PRODUCTS.filter(p => p.category === c.slug).length })));
+
+        filterBar.innerHTML = filters.map(f =>
+            `<button type="button" class="filter-btn" data-filter="${f.slug}">${f.label}<span class="count">(${f.count})</span></button>`).join('');
+
+        function renderCatalog() {
+            $$('.filter-btn', filterBar).forEach(b => b.classList.toggle('active', b.dataset.filter === active));
+            const list = active === 'all' ? PRODUCTS : PRODUCTS.filter(p => p.category === active);
+            grid.innerHTML = list.length ? list.map(productCard).join('') : `<p class="empty-state">${t('search.empty', 'Ürün bulunamadı.')}</p>`;
+            const cat = categoryBySlug(active);
+            const title = $('[data-catalog-title]');
+            const desc = $('[data-catalog-desc]');
+            if (title) title.textContent = cat ? pick(cat.name) : t('catalog.title', 'Ürün Gruplarımız');
+            if (desc) desc.textContent = cat ? pick(cat.desc) : t('catalog.lead', 'Konaklama sektörünün tüm banyo ve misafir ihtiyaçları için geliştirilen ürünlerimizi keşfedin.');
+        }
+
+        filterBar.addEventListener('click', e => {
+            const btn = e.target.closest('.filter-btn');
+            if (!btn) return;
+            active = btn.dataset.filter;
+            const url = active === 'all' ? '/urunler/index.html' : categoryUrl(active);
+            history.replaceState(null, '', url);
+            renderCatalog();
         });
+        renderCatalog();
     }
-});
 
-// Add CSS for custom cursor and particles
-const style = document.createElement('style');
-style.textContent = `
-    .custom-cursor {
-        position: fixed;
-        width: 20px;
-        height: 20px;
-        background: var(--accent-color);
-        border-radius: 50%;
-        pointer-events: none;
-        z-index: 9999;
-        transition: all 0.1s ease;
-        mix-blend-mode: difference;
-    }
-    
-    .custom-cursor.hover {
-        transform: scale(2);
-        background: var(--primary-color);
-    }
-    
-    .particle-container {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        z-index: 1;
-    }
-    
-    .particle {
-        position: absolute;
-        width: 4px;
-        height: 4px;
-        background: var(--accent-color);
-        border-radius: 50%;
-        opacity: 0.3;
-        animation: float-particle linear infinite;
-    }
-    
-    @keyframes float-particle {
-        0% {
-            transform: translateY(100vh) rotate(0deg);
-            opacity: 0;
-        }
-        10% {
-            opacity: 0.3;
-        }
-        90% {
-            opacity: 0.3;
-        }
-        100% {
-            transform: translateY(-100px) rotate(360deg);
-            opacity: 0;
-        }
-    }
-    
-    .ripple {
-        position: absolute;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.3);
-        transform: scale(0);
-        animation: ripple-animation 0.6s linear;
-        pointer-events: none;
-    }
-    
-    @keyframes ripple-animation {
-        to {
-            transform: scale(4);
-            opacity: 0;
-        }
-    }
-    
-    .animate-stagger {
-        opacity: 0;
-        transform: translateY(20px);
-        transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    
-    .animate-stagger.animate-fade-in-up {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    
-    body:not(.loaded) {
-        opacity: 0;
-    }
-    
-    img:not(.loaded) {
-        opacity: 0;
-        transition: opacity 0.3s ease;
-    }
-    
-    img.loaded {
-        opacity: 1;
-    }
-    
-    .magnetic {
-        transition: transform 0.3s ease;
-    }
-`;
+    /* ------------------------------------------------------------------
+       Ürün detay
+       ------------------------------------------------------------------ */
+    const detail = $('[data-product-detail]');
+    if (detail) {
+        const id = new URLSearchParams(window.location.search).get('id');
+        const p = PRODUCTS.find(x => x.id === id);
+        if (!p) {
+            detail.innerHTML = `
+                <div class="empty-state">
+                    <h2>${t('detail.notFound', 'Ürün bulunamadı')}</h2>
+                    <a class="btn btn-color btn-plus" href="/urunler/index.html">${t('common.allProducts', 'Tüm Ürünler')}</a>
+                </div>`;
+        } else {
+            const cat = categoryBySlug(p.category);
+            const name = pick(p.name);
+            document.title = `${name} | Samtida Cosmetics`;
+            $('[data-detail-title]').textContent = name;
+            const crumbCat = $('[data-detail-cat]');
+            crumbCat.textContent = pick(cat.name);
+            crumbCat.href = categoryUrl(cat.slug);
 
-document.head.appendChild(style);
+            detail.innerHTML = `
+                <div class="detail-grid">
+                    <div class="detail-img" data-anim="fade-left"><img src="${p.image}" alt="${name}"></div>
+                    <div class="detail-info" data-anim="fade-right">
+                        <span class="eyebrow">${pick(cat.name)}</span>
+                        <h1>${name}</h1>
+                        <p class="lead">${pick(p.desc)}</p>
+                        <table class="spec-table">
+                            <tr><th>${t('detail.series', 'Seri')}</th><td>Samtida ${pick(SERIES[p.series])}</td></tr>
+                            <tr><th>${t('detail.size', 'Hacim / Ölçü')}</th><td>${p.size}</td></tr>
+                            <tr><th>${t('detail.moq', 'Minimum Sipariş')}</th><td>${p.moq.toLocaleString(I18N.lang)} ${t('detail.pcs', 'adet')}</td></tr>
+                            <tr><th>${t('detail.custom', 'Özel Baskı')}</th><td>${t('detail.customValue', 'Logo baskı ve özel ambalaj seçeneği')}</td></tr>
+                        </table>
+                        <div class="btn-row">
+                            <button type="button" class="btn btn-color btn-plus" data-open-quote data-product="${name}">${t('common.requestQuote', 'Teklif İste')}</button>
+                            <a class="btn btn-outline" href="${categoryUrl(cat.slug)}">${t('detail.back', 'Kategoriye Dön')}</a>
+                        </div>
+                    </div>
+                </div>`;
 
-// Global function to clear filters
-window.clearFilters = function() {
-    const categoryFilter = document.getElementById('category-filter');
-    const originFilter = document.getElementById('origin-filter');
-    const searchInput = document.getElementById('search-input');
-    
-    if (categoryFilter) categoryFilter.value = '';
-    if (originFilter) originFilter.value = '';
-    if (searchInput) searchInput.value = '';
-    
-    // Trigger filter function to show all products
-    const website = new ModernWebsite();
-    website.filterProducts();
-}; 
+            const related = PRODUCTS.filter(x => x.category === p.category && x.id !== p.id).slice(0, 4);
+            const relWrap = $('[data-related]');
+            if (relWrap) relWrap.innerHTML = related.map(productCard).join('');
+        }
+    }
+
+    /* ------------------------------------------------------------------
+       Çeviri — dinamik içerikler oluşturulduktan sonra uygulanır
+       ------------------------------------------------------------------ */
+    I18N.apply();
+
+    /* ------------------------------------------------------------------
+       Slider'lar (Swiper)
+       ------------------------------------------------------------------ */
+    if (window.Swiper) {
+        if ($('.hero-swiper')) {
+            new Swiper('.hero-swiper', {
+                effect: 'fade',
+                fadeEffect: { crossFade: true },
+                loop: true,
+                speed: 1200,
+                autoplay: { delay: 6500, disableOnInteraction: false },
+                pagination: { el: '.hero-pagination', clickable: true },
+                navigation: { prevEl: '.hero-prev', nextEl: '.hero-next' },
+                keyboard: { enabled: true }
+            });
+        }
+        if ($('.groups-swiper')) {
+            new Swiper('.groups-swiper', {
+                slidesPerView: 1.15,
+                spaceBetween: 18,
+                speed: 700,
+                grabCursor: true,
+                navigation: { prevEl: '.groups-prev', nextEl: '.groups-next' },
+                pagination: { el: '.groups-progress', type: 'progressbar' },
+                breakpoints: {
+                    600: { slidesPerView: 2.2, spaceBetween: 24 },
+                    1000: { slidesPerView: 3, spaceBetween: 28 },
+                    1300: { slidesPerView: 4, spaceBetween: 30 }
+                }
+            });
+        }
+    }
+
+    const scrollDown = $('.scroll-down');
+    if (scrollDown) scrollDown.addEventListener('click', e => {
+        e.preventDefault();
+        const target = $(scrollDown.getAttribute('href'));
+        if (target) window.scrollTo({ top: target.offsetTop - 60, behavior: 'smooth' });
+    });
+
+    /* ------------------------------------------------------------------
+       Sekmeler (Misyon / Vizyon)
+       ------------------------------------------------------------------ */
+    $$('.tabs').forEach(tabs => {
+        const scope = tabs.parentElement;
+        $$('.tab-btn', tabs).forEach(btn => btn.addEventListener('click', () => {
+            $$('.tab-btn', tabs).forEach(b => b.classList.toggle('active', b === btn));
+            $$('.tab-panel', scope).forEach(p => p.classList.toggle('active', p.id === btn.dataset.tab));
+        }));
+    });
+
+    /* ------------------------------------------------------------------
+       Scroll animasyonları & sayaçlar
+       ------------------------------------------------------------------ */
+    function countUp(el) {
+        const target = parseInt(el.dataset.count, 10);
+        const start = performance.now();
+        const dur = 1600;
+        (function step(now) {
+            const k = Math.min((now - start) / dur, 1);
+            el.textContent = Math.round(target * (1 - Math.pow(1 - k, 3)));
+            if (k < 1) requestAnimationFrame(step);
+        })(start);
+    }
+
+    if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('in-view');
+                if (entry.target.dataset.count) countUp(entry.target);
+                io.unobserve(entry.target);
+            });
+        }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+        $$('[data-anim], [data-count]').forEach(el => io.observe(el));
+    } else {
+        $$('[data-anim]').forEach(el => el.classList.add('in-view'));
+    }
+})();

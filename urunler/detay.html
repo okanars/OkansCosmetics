@@ -1,50 +1,51 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="tr" class="no-js">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Sayfa başlığı ve açıklaması JavaScript ile dinamik olarak güncellenecek -->
-    <title>Ürün Detayı - Kozmetik Kimya</title>
-    <meta name="description" content="Ürünümüz hakkında detaylı bilgi.">
-    <link rel="stylesheet" href="/css/style.css">
+    <title>Ürün Detayı | Samtida Cosmetics</title>
+    <meta name="description" content="Samtida Cosmetics otel ürünü detayları ve teknik özellikleri.">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2714%27 fill=%27%231a1a1a%27/%3E%3Ctext x=%2729%27 y=%2745%27 font-family=%27Montserrat,Arial%27 font-size=%2738%27 font-weight=%27600%27 fill=%27%23fff%27 text-anchor=%27middle%27%3ES%3C/text%3E%3Ccircle cx=%2749%27 cy=%2718%27 r=%275%27 fill=%27%23ee6e01%27/%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 
-    <header>
-        <nav class="container">
-            <a href="/index.html" class="logo">Okan'ın Kozmetiği A.Ş.</a>
-            <div class="nav-links">
-                <a href="/index.html">Ana Sayfa</a>
-                <a href="/urunler/index.html">Ürünler</a>
-                <a href="/hakkimizda.html">Hakkımızda</a>
-                <a href="/iletisim.html">İletişim</a>
-            </div>
-            <button class="menu-toggle">☰</button>
-        </nav>
-    </header>
-
     <main>
-        <div class="product-detail-container container" id="product-detail">
-            <!-- Ürün detayı buraya JavaScript ile yüklenecek -->
-            <p>Ürün bilgileri yükleniyor...</p>
-        </div>
+        <section class="page-hero" style="background-image:url('/images/samtida/page-banner.jpg'); min-height:340px">
+            <div class="container">
+                <nav class="breadcrumb" aria-label="breadcrumb">
+                    <a href="/index.html" data-i18n="nav.home">Anasayfa</a><span class="sep">/</span>
+                    <a href="/urunler/index.html" data-i18n="nav.products">Ürünler</a><span class="sep">/</span>
+                    <a href="/urunler/index.html" data-detail-cat></a>
+                </nav>
+                <h1 data-detail-title>Ürün Detayı</h1>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container" data-product-detail></div>
+        </section>
+
+        <section class="section section-cream">
+            <div class="container">
+                <div class="section-head" data-anim="fade-up">
+                    <span class="eyebrow" data-i18n="detail.relatedEyebrow">Aynı Gruptan</span>
+                    <h2 class="section-title" data-i18n="detail.related">Benzer Ürünler</h2>
+                </div>
+                <div class="product-grid" data-related></div>
+            </div>
+        </section>
     </main>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 Okan'ın Kozmetiği A.Ş. Tüm hakları saklıdır.</p>
-            <div class="social-links">
-                <a href="#">LinkedIn</a>
-                <a href="#">Twitter</a>
-            </div>
-        </div>
-    </footer>
-
-    <script src="/js/products.js"></script>
-    <script src="/js/script.js"></script>
-    <script src="/js/chatbot.js"></script>
+    <script src="/js/lang/en.js" defer></script>
+    <script src="/js/lang/ru.js" defer></script>
+    <script src="/js/lang.js" defer></script>
+    <script src="/js/products.js" defer></script>
+    <script src="/js/layout.js" defer></script>
+    <script src="/js/script.js" defer></script>
 </body>
-</html> 
+</html>
