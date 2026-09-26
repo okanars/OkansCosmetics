@@ -1,0 +1,16 @@
+{
+    "name": "Samtida Kozmetik",
+    "short_name": "Samtida",
+    "description": "Otel tipi dispanser sistemleri ve logolu otel buklet ürünleri.",
+    "lang": "tr",
+    "start_url": "/index.html",
+    "scope": "/",
+    "display": "standalone",
+    "background_color": "#121011",
+    "theme_color": "#121011",
+    "icons": [
+        { "src": "/images/samtida/icon-192.png", "sizes": "192x192", "type": "image/png" },
+        { "src": "/images/samtida/icon-512.png", "sizes": "512x512", "type": "image/png" },
+        { "src": "/images/samtida/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+    ]
+}

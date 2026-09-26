@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="tr" class="no-js">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Blog | Samtida Kozmetik</title>
+    <meta name="description" content="Samtida Kozmetik blog yazısı.">
+    <!-- seo:start — tools/build.mjs tarafından üretilir, elle düzenlemeyin -->
+    <meta name="robots" content="noindex, follow">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Samtida Kozmetik">
+    <meta property="og:locale" content="tr_TR">
+    <meta property="og:title" content="Blog | Samtida Kozmetik">
+    <meta property="og:description" content="Samtida Kozmetik blog yazısı.">
+    <meta property="og:url" content="https://samtida.com.tr/blog-yazi.html">
+    <meta property="og:image" content="https://samtida.com.tr/images/samtida/og-image.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Blog | Samtida Kozmetik">
+    <meta name="twitter:description" content="Samtida Kozmetik blog yazısı.">
+    <meta name="twitter:image" content="https://samtida.com.tr/images/samtida/og-image.jpg">
+    <!-- seo:end -->
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Samtida">
+    <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="icon" type="image/png" href="/images/samtida/logo-mark.png">
+    <link rel="apple-touch-icon" href="/images/samtida/icon-180.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/lang.js"></script>
+</head>
+<body>
+
+    <main>
+        <section class="page-hero" style="background-image:url('/images/samtida/blog-news.jpg'); min-height:420px">
+            <div class="container">
+                <nav class="breadcrumb" aria-label="breadcrumb"><a href="/index.html" data-i18n="nav.home">Anasayfa</a><span class="sep">/</span><a href="/blog.html" data-i18n="nav.blog">Blog</a></nav>
+                <h1 data-blog-title lang="tr" dir="ltr">Blog</h1>
+                <div class="article-hero-meta" data-blog-meta></div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <p class="lang-note" data-lang-note hidden data-i18n="blog.langNote">Blog yazılarımız yalnızca Türkçe yayınlanmaktadır.</p>
+                <article class="article" data-blog-post></article>
+            </div>
+        </section>
+
+        <section class="section section-cream" data-blog-products hidden>
+            <div class="container">
+                <div class="section-head center">
+                    <span class="eyebrow" data-i18n="blog.productsEyebrow">Ürünler</span>
+                    <h2 class="section-title" data-i18n="blog.products">Yazıda Geçen Ürünler</h2>
+                </div>
+                <div class="product-grid"></div>
+            </div>
+        </section>
+
+        <section class="section" data-blog-related hidden>
+            <div class="container">
+                <div class="section-head center">
+                    <span class="eyebrow" data-i18n="blog.relatedEyebrow">Okumaya Devam Edin</span>
+                    <h2 class="section-title" data-i18n="blog.related">İlgili Yazılar</h2>
+                </div>
+                <div class="blog-grid"></div>
+            </div>
+        </section>
+
+        <section class="cta-band">
+            <div class="container">
+                <div>
+                    <h2 data-i18n="cta.title">Markanıza özel buklet ürünlerini birlikte tasarlayalım.</h2>
+                    <p data-i18n="cta.text">Numune, teklif ve iş birliği talepleriniz için bizimle iletişime geçin.</p>
+                </div>
+                <button type="button" class="btn btn-color btn-plus" data-open-quote data-i18n="common.getQuote">Teklif Al</button>
+            </div>
+        </section>
+    </main>
+
+    <script src="/js/products.js" defer></script>
+    <script src="/js/blog.js" defer></script>
+    <script src="/js/layout.js" defer></script>
+    <script src="/js/script.js" defer></script>
+</body>
+</html>
